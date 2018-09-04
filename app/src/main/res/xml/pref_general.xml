@@ -1,0 +1,105 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <!--<android.support.v7.widget.Toolbar-->
+        <!--android:id="@+id/toolbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:background="@color/colorPrimary"-->
+        <!--android:elevation="2dp"-->
+        <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/toolbar_title"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:fontFamily="@font/google_sans_regular"-->
+            <!--android:text="Sleep Cycle Widget"-->
+            <!--android:textColor="@android:color/black"-->
+            <!--android:textSize="20sp" />-->
+    <!--</android.support.v7.widget.Toolbar>-->
+
+    <PreferenceCategory
+        android:textColor="@color/colorPrimaryDark"
+        android:title="Personal Settings">
+
+        <EditTextPreference
+            android:dialogTitle="Enter time in minutes (ex. 15)"
+            android:inputType="number"
+            android:key="tts"
+            android:numeric="integer"
+            android:singleLine="true"
+            android:summary="15"
+            android:title="Time in minutes" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:textColor="@color/colorPrimaryDark"
+        android:title="Display">
+
+        <ListPreference
+            android:defaultValue="-1"
+            android:dialogTitle="Number of cycles to display"
+            android:entries="@array/cycle_num_list"
+            android:entryValues="@array/cycle_num_values"
+            android:key="cycle_amt"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:summary="5"
+            android:title="@string/cycle_num" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:dialogTitle=""
+            android:key="show_curr"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="On"
+            android:title="Show current time" />
+        <ListPreference
+            android:capitalize="words"
+            android:defaultValue="@string/pref_default_display_name"
+            android:key="theme"
+            android:maxLines="2"
+            android:summaryOff="Coming Soon"
+            android:summaryOn="Coming Soon"
+            android:enabled="false"
+            android:singleLine="true"
+            android:summary="Coming Soon"
+            android:title="Theme (Coming Soon)" />
+        />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:textColor="@color/colorPrimaryDark"
+        android:title="Info">
+
+        <Preference
+            android:dialogTitle=""
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary=""
+            android:title="About" />
+        <Preference
+            android:dialogTitle=""
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="Unlocks themes"
+            android:title="Donate" />
+        <Preference
+            android:dialogTitle=""
+            android:selectable="false"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:summary="@string/version"
+            android:title="" />
+    </PreferenceCategory>
+
+    <!-- NOTE: EditTextPreference accepts EditText attributes. -->
+    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
+
+    <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
+         dismiss it. -->
+    <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
+
+</PreferenceScreen>
