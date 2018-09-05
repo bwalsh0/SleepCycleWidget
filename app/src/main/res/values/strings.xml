@@ -7,7 +7,7 @@
     <string name="sleepDescrip">sleepDescrip</string>
     <string name="def_tip">Calculate Wakeup Time</string>
     <string name="curr_time"></string>
-    <string name="version">Bryan Walsh (v0.6)</string>
+    <string name="version">Bryan Walsh (v0.7)</string>
 
     <string name="disclaimer">On average, it should take you 15 minutes to fall asleep and enter a sleep cycle. This has been accounted for and added to the calculated wakeup times.</string>
     <string name="title_activity_widget_configure_preferences">Settings</string>
@@ -22,16 +22,16 @@
     <string name="pref_title_display_name">Display name</string>
     <string name="pref_default_display_name">John Smith</string>
 
-    <string name="cycle_num">Number of cycles</string>
+    <string name="cycle_num">Number of cycles to display</string>
     <string-array name="cycle_num_list">
         <item>3</item>
         <item>4</item>
         <item>5</item>
     </string-array>
     <string-array name="cycle_num_values">
-        <item>1</item>
         <item>0</item>
-        <item>-1</item>
+        <item>1</item>
+        <item>2</item>
     </string-array>
 
     <!-- Example settings for Data & Sync -->

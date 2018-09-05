@@ -10,6 +10,7 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import android.content.SharedPreferences;
+import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
@@ -45,8 +46,10 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
 
     String nextTime1, nextTime2, nextTime3, nextTime4, nextTime5;
 
-    int time_offset; //User Preference modifiers
+    //User Preference Modifiers
+    int time_offset;
     int cycle_num;
+    boolean curr_flag;
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
@@ -78,37 +81,61 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
         timeContext = context; //links context and intent updates to UpdateTime()
 
         if (onClick1.equals(intent.getAction())){
-            Log.e("onRecieve-onClick", "This just got called");
+            ;
             time_offset = Integer.parseInt(getDefaults("tts", context));
-            ConvertTime(); //Moved into if statement to prevent double-run on init for efficiency
-            UpdateTime(); //call helper
-            Toast.makeText(context, "Time updated, sleep well!", Toast.LENGTH_SHORT).show();
+            cycle_num = Integer.parseInt(getDefaults("cycle_amt", context)) + 3; //Partly hardcoded, fine now but fix later //Use an overloaded get() method
+            curr_flag = getDefaultBool("curr_flag", context);
+                if (time_offset >= 90) {
+                Toast.makeText(timeContext, "Are you sure it takes you " + time_offset + " minutes to sleep?" , Toast.LENGTH_LONG).show();
+                    ConvertTime(); //Moved into if statement to prevent double-run on init for efficiency
+                    UpdateTime(); //call helper
+                }
+                else {
+                    ConvertTime();
+                    UpdateTime();
+                    Toast.makeText(context, "Time updated, sleep well!", Toast.LENGTH_SHORT).show();
 
-            //ToDo: Add option for 12h or 24h time style (if (hour > 12) then {hour - 12})
+                    //ToDo: Add option for 12h or 24h time style (if (hour > 12) then {hour - 12})
+                }
         }
     }
 
     public void UpdateTime() { //Helper for grabbing time -only- when clicked
-            Log.e("UpdateTime", "This got called");
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(timeContext);
             ComponentName AppWidget = new ComponentName(timeContext.getPackageName(), SleepWidgetLIGHT.class.getName());
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(AppWidget);
 
             RemoteViews remoteViews = new RemoteViews(AppWidget.getPackageName(), R.layout.sleep_widget_light);
             remoteViews.setTextViewText(R.id.currTime, time12);
-            remoteViews.setViewVisibility(R.id.currTime, View.VISIBLE);
+            if (!curr_flag) {
+                remoteViews.setViewVisibility(R.id.currTime, View.VISIBLE);
+            }
             remoteViews.setViewVisibility(R.id.default_ll, View.GONE);
             remoteViews.setViewVisibility(R.id.nextTimes_ll, View.VISIBLE);
-
             //nextTimes
-            remoteViews.setTextViewText(R.id.nT1, nextTime1);
-            remoteViews.setTextViewText(R.id.nT2, nextTime2);
-            remoteViews.setTextViewText(R.id.nT3, nextTime3);
-            remoteViews.setTextViewText(R.id.nT4, nextTime4);
-            remoteViews.setTextViewText(R.id.nT5, nextTime5);
+            if (cycle_num == 5) {
+                remoteViews.setTextViewText(R.id.nT1, nextTime1);
+                remoteViews.setTextViewText(R.id.nT2, nextTime2);
+                remoteViews.setTextViewText(R.id.nT3, nextTime3);
+                remoteViews.setTextViewText(R.id.nT4, nextTime4);
+                remoteViews.setTextViewText(R.id.nT5, nextTime5);
+            }
+            if (cycle_num == 4) {
+                remoteViews.setViewVisibility(R.id.nT1, View.GONE);
+                remoteViews.setTextViewText(R.id.nT2, nextTime2);
+                remoteViews.setTextViewText(R.id.nT3, nextTime3);
+                remoteViews.setTextViewText(R.id.nT4, nextTime4);
+                remoteViews.setTextViewText(R.id.nT5, nextTime5);
+            }
+            if (cycle_num == 3) {
+                remoteViews.setViewVisibility(R.id.nT1, View.GONE);
+                remoteViews.setViewVisibility(R.id.nT2, View.GONE);
+                remoteViews.setTextViewText(R.id.nT3, nextTime3);
+                remoteViews.setTextViewText(R.id.nT4, nextTime4);
+                remoteViews.setTextViewText(R.id.nT5, nextTime5);
+            }
 
             appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
-
     }
 
     public void ConvertTime() {
@@ -147,8 +174,7 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
     }
 
     public void NextTimes(){
-        //helper mthd to calculate sleep cycles //OR CREATE NEW CALENDAR INSTANCE
-        //cycles = 90m + user_tts (time til sleep)
+        //cycle length = 90m + time_offset (time til sleep)
 
         calendar.add(Calendar.MINUTE, 90 + time_offset);
         nextTime1 = ShortenString(Integer.toString(calendar.get(Calendar.HOUR)) + ":" +
@@ -206,6 +232,11 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
     public static String getDefaults(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);
+    }
+
+    public static Boolean getDefaultBool(String key, Context context) {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
+        return preferences.getBoolean(key, false);
     }
 }
 

@@ -33,15 +33,15 @@
             android:numeric="integer"
             android:singleLine="true"
             android:summary="15"
-            android:title="Time in minutes" />
+            android:title="Average time it takes you to fall asleep" />
     </PreferenceCategory>
     <PreferenceCategory
         android:textColor="@color/colorPrimaryDark"
         android:title="Display">
 
         <ListPreference
-            android:defaultValue="-1"
-            android:dialogTitle="Number of cycles to display"
+            android:defaultValue="2"
+            android:dialogTitle="How many sleep cycles to show"
             android:entries="@array/cycle_num_list"
             android:entryValues="@array/cycle_num_values"
             android:key="cycle_amt"
@@ -50,13 +50,14 @@
             android:summary="5"
             android:title="@string/cycle_num" />
         <CheckBoxPreference
-            android:defaultValue="true"
+            android:defaultValue="false"
             android:dialogTitle=""
-            android:key="show_curr"
+            android:key="curr_flag"
             android:selectAllOnFocus="true"
             android:singleLine="true"
-            android:summary="On"
-            android:title="Show current time" />
+            android:summaryOff="Current time will be displayed"
+            android:summaryOn="Current time will not be displayed"
+            android:title="Hide current time" />
         <ListPreference
             android:capitalize="words"
             android:defaultValue="@string/pref_default_display_name"
@@ -88,7 +89,7 @@
             android:title="Donate" />
         <Preference
             android:dialogTitle=""
-            android:selectable="false"
+            android:selectable="true"
             android:selectAllOnFocus="true"
             android:singleLine="true"
             android:summary="@string/version"

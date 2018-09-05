@@ -11,6 +11,7 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
@@ -45,14 +46,8 @@ import java.util.List;
  * API Guide</a> for more information on developing a Settings UI.
  */
 public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
-
-    /**
-     * A preference value change listener that updates the preference's summary
-     * to reflect its new value.
-     */
-
-    static String tts_string;
-    static EditTextPreference tts_pref;
+    static EditTextPreference tts_string;
+    static ListPreference cycle_amt;
 
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
@@ -68,33 +63,25 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
                 // Set the summary to reflect the new value.
                 preference.setSummary(
                         index >= 0
-                                ? listPreference.getEntries()[index]
-                                : null);
-
-            } else if (preference instanceof EditTextPreference) {
-                if (TextUtils.isEmpty(stringValue)) {
-                    preference.setSummary(stringValue);
-
-                } else {
-                    Ringtone ringtone = RingtoneManager.getRingtone(
-                            preference.getContext(), Uri.parse(stringValue));
-
-                    if (ringtone == null) {
-                        // Clear the summary if there was a lookup error.
-                        preference.setSummary(null);
-                    } else {
-                        // Set the summary to reflect the new ringtone display
-                        // name.
-                        String name = ringtone.getTitle(preference.getContext());
-                        preference.setSummary(name);
-                    }
-                }
-
-            } else {
-                // For all other preferences, set the summary to the value's
-                // simple string representation.
-                preference.setSummary(stringValue);
+                                ? listPreference.getEntries()[index] + " cycles"
+                                : null );
+                return true;
             }
+
+            else if (preference instanceof EditTextPreference) {
+                    preference.setSummary(stringValue + " minutes");
+                    return true;
+                }
+//                else if (preference instanceof CheckBoxPreference) {
+//                    boolean flag = Boolean.valueOf(value.toString());
+//                    Log.e("Checkbox", "" + flag);
+//                    if (!flag) {
+//                        preference.setSummary("Current time is hidden");
+//                        return true;
+//                    } else {
+//                        preference.setSummary("Current time is visible");
+//                    }
+//                }
             return true;
         }
     };
@@ -131,33 +118,6 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
 
     private static final String PREFS_NAME = "com.bryanwalsh.sleeptimewidget2.SleepWidgetLIGHT";
     private static final String PREF_PREFIX_KEY = "appwidget_";
-    int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
-    EditText mAppWidgetText;
-
-    View.OnClickListener mOnClickListener = new View.OnClickListener() {
-        public void onClick(View v) {
-            final Context context = WidgetConfigurePreferences.this;
-
-            // When the button is clicked, store the string locally
-            mAppWidgetText = findViewById(R.id.appwidget_text);
-            String widgetText = mAppWidgetText.getText().toString();
-            saveTitlePref(context, mAppWidgetId, widgetText);
-
-            // It is the responsibility of the configuration activity to update the app widget
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-
-            RemoteViews views = new RemoteViews(context.getPackageName(),
-                    R.layout.sleep_widget_light);
-            appWidgetManager.updateAppWidget(mAppWidgetId, views);
-            SleepWidgetLIGHT.updateAppWidget(context, appWidgetManager, mAppWidgetId);
-
-            // Make sure we pass back the original appWidgetId
-            Intent resultValue = new Intent();
-            resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
-            setResult(RESULT_OK, resultValue);
-            finish();
-        }
-    };
 
     public WidgetConfigurePreferences() {
         super();
@@ -245,16 +205,18 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
 
-//            tts_pref = (EditTextPreference)findPreference("tts");
-//            SharedPreferences tts = getActivity().getSharedPreferences("tts", MODE_PRIVATE);
-//            tts_pref.setSummary(tts.getString("tts", "15"));
-            //MAY BE ARBITRARY ^
+            tts_string = (EditTextPreference) findPreference("tts");
+            SharedPreferences tts = getActivity().getSharedPreferences("tts", MODE_PRIVATE);
+            tts_string.setSummary(tts.getString("tts", "15"));
+
+            cycle_amt = (ListPreference) findPreference("cycle_amt");
+            SharedPreferences c_num = getActivity().getSharedPreferences("cycle_amt", MODE_PRIVATE);
+            cycle_amt.setSummary(c_num.getString("cycle_amt", "5"));
 
             bindPreferenceSummaryToValue(findPreference("tts"));
             bindPreferenceSummaryToValue(findPreference("cycle_amt"));
+            CheckBoxPreference pref = (CheckBoxPreference)findPreference("curr_flag");
 
-            setDefaults("tts", "", getContext());
-            setDefaults("cycle_amt", "", getContext());
         }
 
         @Override
