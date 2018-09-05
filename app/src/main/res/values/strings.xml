@@ -9,7 +9,9 @@
     <string name="curr_time"></string>
     <string name="version">Bryan Walsh (v0.7)</string>
 
-    <string name="disclaimer">On average, it should take you 15 minutes to fall asleep and enter a sleep cycle. This has been accounted for and added to the calculated wakeup times.</string>
+    <string name="disclaimer">It takes the average person 15 minutes to enter a sleep cycle.
+        By default, this amount is added in the calculation. Configure your personal
+        preferences in the widget settings.</string>
     <string name="title_activity_widget_configure_preferences">Settings</string>
 
     <!-- Strings related to Settings -->

@@ -18,17 +18,12 @@ import android.widget.RemoteViews;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import static android.content.Context.MODE_PRIVATE;
-
 //ToDo: Change app name to SleepCycleWidget
 
 public class SleepWidgetLIGHT extends AppWidgetProvider {
     private static final String onClick1 = "GET_TIME";
     public Context timeContext;
     public Intent timeIntent;
-
-    //SharedPrefs
-    SharedPreferences tts;
 
     Locale aLocale = Locale.getDefault();
     Calendar calendar = Calendar.getInstance(aLocale);
@@ -43,7 +38,6 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
     String hour;
     String time24;
     String time12 = "Error Retrieving Locale";
-
     String nextTime1, nextTime2, nextTime3, nextTime4, nextTime5;
 
     //User Preference Modifiers
@@ -81,11 +75,10 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
         timeContext = context; //links context and intent updates to UpdateTime()
 
         if (onClick1.equals(intent.getAction())){
-            ;
             time_offset = Integer.parseInt(getDefaults("tts", context));
             cycle_num = Integer.parseInt(getDefaults("cycle_amt", context)) + 3; //Partly hardcoded, fine now but fix later //Use an overloaded get() method
             curr_flag = getDefaultBool("curr_flag", context);
-                if (time_offset >= 90) {
+                if (time_offset >= 90) { //double check if user accidentally set offset too high
                 Toast.makeText(timeContext, "Are you sure it takes you " + time_offset + " minutes to sleep?" , Toast.LENGTH_LONG).show();
                     ConvertTime(); //Moved into if statement to prevent double-run on init for efficiency
                     UpdateTime(); //call helper
@@ -206,7 +199,6 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
 
     //TODO: Include avg time taken to fall asleep (settings)
         //TODO: Append Cycle #'s to each time
-
     }
 
     public String ShortenString(String nextTime) {
