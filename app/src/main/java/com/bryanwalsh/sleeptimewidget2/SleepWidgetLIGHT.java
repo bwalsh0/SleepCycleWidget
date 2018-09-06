@@ -71,6 +71,7 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        super.onReceive(context, intent);
         timeIntent = intent;
         timeContext = context; //links context and intent updates to UpdateTime()
 
@@ -82,7 +83,7 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
                 Toast.makeText(timeContext, "Are you sure it takes you " + time_offset + " minutes to sleep?" , Toast.LENGTH_LONG).show();
                     ConvertTime(); //Moved into if statement to prevent double-run on init for efficiency
                     UpdateTime(); //call helper
-                }
+                }   //TODO: Add option for hiding toast message (demo in preferences too)
                 else {
                     ConvertTime();
                     UpdateTime();

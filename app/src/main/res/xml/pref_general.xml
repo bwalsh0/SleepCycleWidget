@@ -61,14 +61,12 @@
         <ListPreference
             android:capitalize="words"
             android:defaultValue="@string/pref_default_display_name"
+            android:enabled="false"
             android:key="theme"
             android:maxLines="2"
-            android:summaryOff="Coming Soon"
-            android:summaryOn="Coming Soon"
-            android:enabled="false"
             android:singleLine="true"
             android:summary="Coming Soon"
-            android:title="Theme (Coming Soon)" />
+            android:title="Theme" />
         />
     </PreferenceCategory>
     <PreferenceCategory

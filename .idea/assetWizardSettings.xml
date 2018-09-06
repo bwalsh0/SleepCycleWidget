@@ -19,8 +19,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\Users\Bryan Walsh\SleepTimeWidget2\app\src\main\res\drawable\widget_preview.png" />
-                                      <entry key="outputName" value="light_widget_preview" />
+                                      <entry key="imageAsset" value="C:\Users\Bryan Walsh\SleepTimeWidget2\app\src\main\res\backdrop.png" />
+                                      <entry key="outputName" value="backdrop" />
+                                      <entry key="theme" value="CUSTOM" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -63,6 +64,11 @@
                                 </PersistentState>
                               </value>
                             </entry>
+                          </map>
+                        </option>
+                        <option name="values">
+                          <map>
+                            <entry key="outputIconType" value="ACTIONBAR" />
                           </map>
                         </option>
                       </PersistentState>

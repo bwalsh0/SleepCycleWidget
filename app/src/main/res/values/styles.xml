@@ -4,45 +4,39 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="windowNoTitle">true</item>
         <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowBackground">@android:color/background_light</item>
-        <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:fontFamily">@font/google_sans_regular</item>
-        <item name="coordinatorLayoutStyle">@style/Widget.Support.CoordinatorLayout</item>
         <item name="materialCardViewStyle">@style/Widget.MaterialComponents.CardView</item>
         <item name="windowActionModeOverlay">true</item>
         <item name="android:colorBackground">#fafafa</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:windowLightNavigationBar">true</item>
     </style>
 
     <style name="PreferenceScreen" parent="Theme.AppCompat.Light">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimaryDark</item>
-        <item name="android:windowLightStatusBar">true</item>
         <item name="android:windowBackground">@android:color/background_light</item>
         <item name="android:statusBarColor">@color/colorPrimary</item>
+        <item name="android:fontFamily">@font/google_sans_regular</item>
+        <item name="android:navigationBarColor">@color/colorPrimary</item>
+        <item name="android:windowLightNavigationBar">true</item>
+    </style>
+
+    <style name="ToolbarTheme" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:fontFamily">@font/google_sans_regular</item>
     </style>
 
     <style name="TextAppearance.Widget.Event.Toolbar.Title" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
-        <!--Any text styling can be done here-->
         <item name="android:textStyle">normal</item>
         <item name="android:text">Sleep Cycle Widget</item>
-    </style>
-
-    <style name="AppTheme.NoActionBar" parent="AppTheme">
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark">
-        <item name="windowNoTitle">true</item>
-    </style>
-
-    <style name="ThemeOverlay" parent="ThemeOverlay.AppCompat">
-        <item name="windowNoTitle">true</item>
+        <item name="android:fontFamily">@font/google_sans_regular</item>
+        <item name="android:textSize">28dp</item>
     </style>
 
 

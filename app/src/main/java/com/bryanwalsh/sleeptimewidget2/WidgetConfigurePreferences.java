@@ -157,13 +157,13 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
 
-            tts_string = (EditTextPreference) findPreference("tts");
-            SharedPreferences tts = getActivity().getSharedPreferences("tts", MODE_PRIVATE);
-            tts_string.setSummary(tts.getString("tts", "15"));
-
-            cycle_amt = (ListPreference) findPreference("cycle_amt");
-            SharedPreferences c_num = getActivity().getSharedPreferences("cycle_amt", MODE_PRIVATE);
-            cycle_amt.setSummary(c_num.getString("cycle_amt", "5"));
+//            tts_string = (EditTextPreference) findPreference("tts");
+//            SharedPreferences tts = getActivity().getSharedPreferences("tts", MODE_PRIVATE);
+//            tts_string.setSummary(tts.getString("tts", "15"));
+//
+//            cycle_amt = (ListPreference) findPreference("cycle_amt");
+//            SharedPreferences c_num = getActivity().getSharedPreferences("cycle_amt", MODE_PRIVATE);
+//            cycle_amt.setSummary(c_num.getString("cycle_amt", "5"));
 
             bindPreferenceSummaryToValue(findPreference("tts"));
             bindPreferenceSummaryToValue(findPreference("cycle_amt"));
@@ -179,13 +179,6 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
                 return true;
             }
             return super.onOptionsItemSelected(item);
-        }
-
-        public static void setDefaults(String key, String value, Context context) {
-            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-            SharedPreferences.Editor editor = preferences.edit();
-            editor.putString(key, value);
-            editor.commit();
         }
     }
 

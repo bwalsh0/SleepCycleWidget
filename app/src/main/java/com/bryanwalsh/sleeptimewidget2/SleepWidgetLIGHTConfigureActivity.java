@@ -10,6 +10,8 @@ import android.preference.PreferenceActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.RemoteViews;
 import android.widget.TextView;
@@ -56,7 +58,6 @@ public class SleepWidgetLIGHTConfigureActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(getApplicationContext(), WidgetConfigurePreferences.class);
             intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, WidgetConfigurePreferences.GeneralPreferenceFragment.class.getName());
-            intent.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, true); //TODO: Try removing this flag to enable headers on tablets
             startActivity(intent);
         }
     };
@@ -106,6 +107,11 @@ public class SleepWidgetLIGHTConfigureActivity extends AppCompatActivity {
         TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        Window window = getWindow();
+        window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
