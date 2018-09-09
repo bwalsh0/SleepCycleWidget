@@ -7,7 +7,7 @@
     <string name="sleepDescrip">sleepDescrip</string>
     <string name="def_tip">Calculate Wakeup Times</string>
     <string name="curr_time"></string>
-    <string name="version">Bryan Walsh (v0.8.1)</string>
+    <string name="version">Bryan Walsh (v0.8.2)</string>
 
     <string name="disclaimer">It takes the average person 15 minutes to enter a sleep cycle.
         By default, this amount is added in the calculation. Configure your personal
