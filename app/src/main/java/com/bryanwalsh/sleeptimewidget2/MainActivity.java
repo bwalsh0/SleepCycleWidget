@@ -38,6 +38,15 @@ public class MainActivity extends AppCompatActivity {
 
         getWindow().setNavigationBarColor(getResources().getColor(R.color.colorPrimary));
 
+        FloatingActionButton fab = findViewById(R.id.config_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, WidgetConfigurePreferences.class);
+                intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, WidgetConfigurePreferences.GeneralPreferenceFragment.class.getName());
+                startActivity(intent);
+            }   //TODO: snackbar for returning to previous page (for saved settings)
+        });
+
         //If there are issues with older versions, uncomment below
 //        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
 //            getWindow().setNavigationBarColor(getResources().getColor(R.color.colorPrimary));
@@ -69,5 +78,3 @@ public class MainActivity extends AppCompatActivity {
 //        return super.onOptionsItemSelected(item);
 //    }
 }
-//TODO: Replace Configure 3-dot menu with about page
-//TODO: Add settings in mainActivity that are parallel to configureActivity

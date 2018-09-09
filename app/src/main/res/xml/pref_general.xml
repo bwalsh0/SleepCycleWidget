@@ -53,11 +53,16 @@
             android:defaultValue="false"
             android:dialogTitle=""
             android:key="curr_flag"
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
             android:summaryOff="Current time will be displayed"
             android:summaryOn="Current time will not be displayed"
             android:title="Hide current time" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:dialogTitle=""
+            android:key="toast_flag"
+            android:summaryOff="Toast will be displayed"
+            android:summaryOn="Toast will not be displayed"
+            android:title="Hide toast message on time update" />
         <ListPreference
             android:capitalize="words"
             android:defaultValue="@string/pref_default_display_name"

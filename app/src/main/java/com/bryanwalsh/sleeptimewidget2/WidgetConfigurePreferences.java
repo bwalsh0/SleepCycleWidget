@@ -167,7 +167,8 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
 
             bindPreferenceSummaryToValue(findPreference("tts"));
             bindPreferenceSummaryToValue(findPreference("cycle_amt"));
-            CheckBoxPreference pref = (CheckBoxPreference)findPreference("curr_flag");
+            CheckBoxPreference toast_flag = (CheckBoxPreference) findPreference("toast_flag");
+            CheckBoxPreference curr_flag = (CheckBoxPreference)findPreference("curr_flag");
 
         }
 

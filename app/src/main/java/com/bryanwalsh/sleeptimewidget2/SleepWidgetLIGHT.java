@@ -44,6 +44,7 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
     int time_offset;
     int cycle_num;
     boolean curr_flag;
+    boolean toast_flag;
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
 
@@ -76,20 +77,25 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
         timeContext = context; //links context and intent updates to UpdateTime()
 
         if (onClick1.equals(intent.getAction())){
+
+            //User Preferences
             time_offset = Integer.parseInt(getDefaults("tts", context));
             cycle_num = Integer.parseInt(getDefaults("cycle_amt", context)) + 3; //Partly hardcoded, fine now but fix later //Use an overloaded get() method
             curr_flag = getDefaultBool("curr_flag", context);
+            toast_flag = getDefaultBool("toast_flag", context);
+
                 if (time_offset >= 90) { //double check if user accidentally set offset too high
                 Toast.makeText(timeContext, "Are you sure it takes you " + time_offset + " minutes to sleep?" , Toast.LENGTH_LONG).show();
                     ConvertTime(); //Moved into if statement to prevent double-run on init for efficiency
                     UpdateTime(); //call helper
-                }   //TODO: Add option for hiding toast message (demo in preferences too)
+                }
                 else {
                     ConvertTime();
                     UpdateTime();
-                    Toast.makeText(context, "Time updated, sleep well!", Toast.LENGTH_SHORT).show();
-
-                    //ToDo: Add option for 12h or 24h time style (if (hour > 12) then {hour - 12})
+                    if (!toast_flag) {
+                        Toast.makeText(context, "Time updated, sleep well!", Toast.LENGTH_SHORT).show();
+                    }
+                    //ToDo: Add option for 12h or 24h time style (after v1.0 release)
                 }
         }
     }
@@ -158,6 +164,14 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
         }
     }
 
+    public String AppendHour(int integer) {
+        if (integer == 0)
+            return "12";
+        else {
+            return Integer.toString(integer);
+        }
+    }
+
     public String GetMeridiem() { //am/pm for 12h format
         if (calendar.get(Calendar.AM_PM) != 0) {
             return " PM";
@@ -171,34 +185,31 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
         //cycle length = 90m + time_offset (time til sleep)
 
         calendar.add(Calendar.MINUTE, 90 + time_offset);
-        nextTime1 = ShortenString(Integer.toString(calendar.get(Calendar.HOUR)) + ":" +
+        nextTime1 = ShortenString(AppendHour(calendar.get(Calendar.HOUR)) + ":" +
                 AppendMin(calendar.get(Calendar.MINUTE)) + GetMeridiem());                               //TODO: Find a way to incorporate ConvertTimes() for min < 10
         Log.e("NextTime1", nextTime1);
 
-        calendar.add(Calendar.MINUTE, 90 + time_offset);
-        nextTime2 = ShortenString(Integer.toString(calendar.get(Calendar.HOUR)) + ":" +
+        calendar.add(Calendar.MINUTE, 90);
+        nextTime2 = ShortenString(AppendHour(calendar.get(Calendar.HOUR)) + ":" +
                 AppendMin(calendar.get(Calendar.MINUTE)) + GetMeridiem());
         Log.e("NextTime2", nextTime2);
 
-        calendar.add(Calendar.MINUTE, 90 + time_offset);
-        nextTime3 = ShortenString(Integer.toString(calendar.get(Calendar.HOUR)) + ":" +
+        calendar.add(Calendar.MINUTE, 90);
+        nextTime3 = ShortenString(AppendHour(calendar.get(Calendar.HOUR)) + ":" +
                 AppendMin(calendar.get(Calendar.MINUTE)) + GetMeridiem());
         Log.e("NextTime3", nextTime3);
 
-        calendar.add(Calendar.MINUTE, 90 + time_offset);
-        nextTime4 = ShortenString(Integer.toString(calendar.get(Calendar.HOUR)) + ":" +
+        calendar.add(Calendar.MINUTE, 90);
+        nextTime4 = ShortenString(AppendHour(calendar.get(Calendar.HOUR)) + ":" +
                 AppendMin(calendar.get(Calendar.MINUTE)) + GetMeridiem());
         Log.e("NextTime4", nextTime4);
-        //TODO: Fix time landing on 12:00 being presented as 0:00
 
-        calendar.add(Calendar.MINUTE, 90 + time_offset);
-        nextTime5 = ShortenString(Integer.toString(calendar.get(Calendar.HOUR)) + ":" +
+        calendar.add(Calendar.MINUTE, 90);
+        nextTime5 = ShortenString(AppendHour(calendar.get(Calendar.HOUR)) + ":" +
                 AppendMin(calendar.get(Calendar.MINUTE)) + GetMeridiem());
         Log.e("NextTime5", nextTime5);
 
         //ShortenString();
-
-    //TODO: Include avg time taken to fall asleep (settings)
         //TODO: Append Cycle #'s to each time
     }
 

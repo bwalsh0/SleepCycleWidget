@@ -5,7 +5,7 @@
     <string name="configure">Widget Name</string>
     <string name="add_widget">Add widget</string>
     <string name="sleepDescrip">sleepDescrip</string>
-    <string name="def_tip">Calculate Wakeup Time</string>
+    <string name="def_tip">Calculate Wakeup Times</string>
     <string name="curr_time"></string>
     <string name="version">Bryan Walsh (v0.8.1)</string>
 
