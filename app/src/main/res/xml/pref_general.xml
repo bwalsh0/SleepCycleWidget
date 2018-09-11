@@ -80,20 +80,20 @@
 
         <Preference
             android:dialogTitle=""
-            android:selectAllOnFocus="true"
+            android:icon="@drawable/ic_outline_open_in_new_24px"
+            android:key="aboutlink"
             android:singleLine="true"
             android:summary=""
             android:title="About" />
-        <Preference
-            android:dialogTitle=""
-            android:selectAllOnFocus="true"
-            android:singleLine="true"
-            android:summary="Unlocks themes"
-            android:title="Donate" />
+        <!--<Preference-->
+            <!--android:dialogTitle=""-->
+            <!--android:selectAllOnFocus="true"-->
+            <!--android:singleLine="true"-->
+            <!--android:summary="Unlocks themes"-->
+            <!--android:title="Donate" />-->
         <Preference
             android:dialogTitle=""
             android:selectable="true"
-            android:selectAllOnFocus="true"
             android:singleLine="true"
             android:summary="@string/version"
             android:title="" />

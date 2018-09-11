@@ -1,4 +1,4 @@
-package com.bryanwalsh.sleeptimewidget2;
+package com.bryanwalsh.sleepcyclewidget;
 
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
@@ -10,12 +10,10 @@ import java.util.Calendar;
 import java.util.Locale;
 
 import android.content.SharedPreferences;
-import android.preference.ListPreference;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
-import android.widget.TextView;
 import android.widget.Toast;
 
 //ToDo: Change app name to SleepCycleWidget

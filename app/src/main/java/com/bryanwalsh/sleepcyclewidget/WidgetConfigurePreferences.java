@@ -1,42 +1,24 @@
-package com.bryanwalsh.sleeptimewidget2;
+package com.bryanwalsh.sleepcyclewidget;
 
 import android.annotation.TargetApi;
-import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
-import android.media.Ringtone;
-import android.media.RingtoneManager;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceActivity;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.preference.RingtonePreference;
-import android.support.v7.app.AppCompatDelegate;
-import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
-import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.RemoteViews;
-import android.widget.TextView;
 
 import java.util.List;
 
 public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
-    static EditTextPreference tts_string;
-    static ListPreference cycle_amt;
 
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
@@ -169,6 +151,17 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
             bindPreferenceSummaryToValue(findPreference("cycle_amt"));
             CheckBoxPreference toast_flag = (CheckBoxPreference) findPreference("toast_flag");
             CheckBoxPreference curr_flag = (CheckBoxPreference)findPreference("curr_flag");
+
+            Preference about = findPreference("aboutlink");
+
+            about.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(), AboutActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+            });
 
         }
 

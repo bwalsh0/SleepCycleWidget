@@ -1,4 +1,4 @@
-package com.bryanwalsh.sleeptimewidget2;
+package com.bryanwalsh.sleepcyclewidget;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;

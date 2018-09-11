@@ -1,12 +1,14 @@
 <resources>
-    <string name="app_name">SleepTimeWidget2</string>
+    <string name="app_name">Sleep Cycle Widget</string>
     <string name="action_settings">Settings</string>
-    <string name="appwidget_text">Sleep Time Widget</string>
+    <string name="appwidget_text">Sleep Cycle Widget</string>
     <string name="configure">Widget Name</string>
     <string name="add_widget">Add widget</string>
     <string name="sleepDescrip">sleepDescrip</string>
     <string name="def_tip">Calculate Wakeup Times</string>
     <string name="curr_time"></string>
+    <string name="howto">To add a widget, press and hold a space on your home screen and select
+        &quot;Widgets&quot;.</string>
     <string name="version">Bryan Walsh (v0.8.2)</string>
 
     <string name="disclaimer">It takes the average person 15 minutes to enter a sleep cycle.

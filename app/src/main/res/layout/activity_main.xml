@@ -38,7 +38,7 @@
                 android:src="@drawable/backdrop"
                 app:layout_collapseMode="parallax"
                 app:layout_scrollFlags="scroll|exitUntilCollapsed" />
-
+<!--TODO: Include preview of widget into above backdrop-->
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="wrap_content"
@@ -78,12 +78,12 @@
         <!--app:strokeWidth="1dp"-->
         <!--tools:layout_editor_absoluteX="16dp"-->
         <!--tools:layout_editor_absoluteY="154dp" />-->
-
+<!--TODO: Include button to about page here ^-->
         <LinearLayout
             android:id="@+id/ll_1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_margin="16dp"
+            android:layout_margin="12dp"
             android:layout_marginTop="4dp"
             android:gravity="center"
             android:orientation="vertical">
@@ -101,19 +101,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/add_button" />
 
+            <TextView
+                android:id="@+id/intro2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/howto"
+                android:textAlignment="textStart"
+                android:textColor="#212121"
+                android:textSize="16sp" />
+
             <android.support.design.card.MaterialCardView
                 android:id="@+id/card1"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:elevation="4dp"
+                android:elevation="8dp"
                 android:padding="8dp">
 
                 <TextView
                     android:id="@+id/disclaimer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="4dp"
+                    android:layout_margin="8dp"
                     android:fontFamily="@font/google_sans_regular"
                     android:text="@string/disclaimer"
                     android:textAlignment="textStart"
