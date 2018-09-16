@@ -23,6 +23,7 @@
             android:layout_marginBottom="8dp"
             android:layout_weight="3.2"
             android:backgroundTint="#7986cb"
+            android:contentDescription="button"
             android:elevation="0dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_round_snooze_24px"
@@ -40,7 +41,7 @@
                 android:id="@+id/currTime"
                 android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="2"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/open_sans"
                 android:text="@string/curr_time"
                 android:textAlignment="center"
@@ -53,7 +54,6 @@
                 android:id="@+id/default_ll"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
                 android:gravity="center_vertical|center_horizontal|center"
                 android:orientation="vertical"
                 android:visibility="visible">
@@ -61,7 +61,7 @@
                 <TextView
                     android:id="@+id/defaultTooltip"
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:clickable="false"
                     android:fontFamily="@font/open_sans"
@@ -77,8 +77,7 @@
             <LinearLayout
                 android:id="@+id/nextTimes_ll"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_height="match_parent"
                 android:gravity="center|center_horizontal|center_vertical"
                 android:orientation="horizontal"
                 android:visibility="gone">
@@ -89,6 +88,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/open_sans"
+                    android:lineSpacingExtra="-4dp"
                     android:textAlignment="center"
                     android:textColor="#7986cb" />
 
@@ -98,6 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/open_sans"
+                    android:lineSpacingExtra="-4dp"
                     android:textAlignment="center"
                     android:textColor="#5c6bc0" />
 
@@ -107,6 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/open_sans"
+                    android:lineSpacingExtra="-4dp"
                     android:textAlignment="center"
                     android:textColor="#3f51b5" />
 
@@ -116,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/open_sans"
+                    android:lineSpacingExtra="-4dp"
                     android:textAlignment="center"
                     android:textColor="#303f9f" />
 
@@ -125,6 +128,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:fontFamily="@font/open_sans"
+                    android:lineSpacingExtra="-4dp"
                     android:textAlignment="center"
                     android:textColor="#1a237e" />
             </LinearLayout>
