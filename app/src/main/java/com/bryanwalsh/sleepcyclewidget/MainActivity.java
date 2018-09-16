@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         CollapsingToolbarLayout toolbar = findViewById(R.id.collapse);
 
         //Collapsing Toolbar Title Formatting
-        final Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/google_sans_regular.ttf");
+        final Typeface tf = Typeface.create("open-sans", Typeface.NORMAL);
 
         //Expanded and Collapsed modifiers
         toolbar.setCollapsedTitleTypeface(tf);

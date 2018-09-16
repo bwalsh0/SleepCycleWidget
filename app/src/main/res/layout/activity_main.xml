@@ -63,7 +63,7 @@
         <!--android:id="@+id/settings_button"-->
         <!--android:layout_width="wrap_content"-->
         <!--android:layout_height="wrap_content"-->
-        <!--android:fontFamily="@font/google_sans_medium"-->
+        <!--android:fontFamily="@font/"-->
         <!--android:paddingLeft="16dp"-->
         <!--android:paddingTop="8dp"-->
         <!--android:paddingRight="16dp"-->
@@ -92,7 +92,7 @@
                 android:id="@+id/intro"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/google_sans_regular"
+                android:fontFamily="@font/open_sans"
                 android:text="This widget will calculate when your sleep\ncycles end, allowing you to set alarms at times that won't interrupt a cycle."
                 android:textAlignment="textStart"
                 android:textColor="#212121"
@@ -124,7 +124,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
-                    android:fontFamily="@font/google_sans_regular"
+                    android:fontFamily="@font/open_sans"
                     android:text="@string/disclaimer"
                     android:textAlignment="textStart"
                     android:textColor="#424242"
@@ -141,10 +141,12 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
         android:src="@drawable/ic_round_settings_24px"
+        android:tint="#212121"
         app:backgroundTint="@color/colorPrimary"
         app:elevation="4dp"
         app:fabSize="normal"
         app:layout_anchor="@id/appbar"
-        app:layout_anchorGravity="bottom|right|end" />
+        app:layout_anchorGravity="bottom|right|end"
+        app:rippleColor="@android:color/background_light" />
 
 </android.support.design.widget.CoordinatorLayout>

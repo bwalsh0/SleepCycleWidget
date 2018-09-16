@@ -3,6 +3,8 @@
     package="com.bryanwalsh.sleepcyclewidget">
 
     <uses-permission android:name="android.permission.REQUEST_COMPANION_RUN_IN_BACKGROUND" />
+    <uses-permission android:name="com.android.vending.BILLING" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -49,7 +51,10 @@
             android:name="com.bryanwalsh.sleepcyclewidget.WidgetConfigurePreferences"
             android:label="@string/title_activity_widget_configure_preferences"
             android:theme="@style/PreferenceScreen"></activity>
-        <activity android:name="com.bryanwalsh.sleepcyclewidget.AboutActivity"></activity>
+        <activity android:name="com.bryanwalsh.sleepcyclewidget.AboutActivity"
+            android:parentActivityName=".WidgetConfigurePreferences" >
+        </activity>
+        <activity android:name="com.bryanwalsh.sleepcyclewidget.PurchaseActivity"/>
     </application>
 
 </manifest>

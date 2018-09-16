@@ -14,6 +14,7 @@ import android.preference.Preference;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 
 import java.util.List;
@@ -139,25 +140,28 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
 
-//            tts_string = (EditTextPreference) findPreference("tts");
-//            SharedPreferences tts = getActivity().getSharedPreferences("tts", MODE_PRIVATE);
-//            tts_string.setSummary(tts.getString("tts", "15"));
-//
-//            cycle_amt = (ListPreference) findPreference("cycle_amt");
-//            SharedPreferences c_num = getActivity().getSharedPreferences("cycle_amt", MODE_PRIVATE);
-//            cycle_amt.setSummary(c_num.getString("cycle_amt", "5"));
-
             bindPreferenceSummaryToValue(findPreference("tts"));
             bindPreferenceSummaryToValue(findPreference("cycle_amt"));
             CheckBoxPreference toast_flag = (CheckBoxPreference) findPreference("toast_flag");
             CheckBoxPreference curr_flag = (CheckBoxPreference)findPreference("curr_flag");
 
+            //ABOUT ONCLICK
             Preference about = findPreference("aboutlink");
-
             about.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
                 @Override
                 public boolean onPreferenceClick(Preference preference) {
                     Intent intent = new Intent(getActivity(), AboutActivity.class);
+                    startActivity(intent);
+                    return true;
+                }
+            });
+
+            //PURCHASE ONCLICK
+            Preference buy = findPreference("buyIap");
+            buy.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
+                @Override
+                public boolean onPreferenceClick(Preference preference) {
+                    Intent intent = new Intent(getActivity(), PurchaseActivity.class);
                     startActivity(intent);
                     return true;
                 }

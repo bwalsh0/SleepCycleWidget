@@ -26,7 +26,7 @@
             android:elevation="0dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_round_snooze_24px"
-            android:tint="@android:color/black" />
+            android:tint="#212121" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,12 +40,11 @@
                 android:id="@+id/currTime"
                 android:layout_width="128dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_weight="2"
-                android:fontFamily="@font/google_sans_regular"
+                android:fontFamily="@font/open_sans"
                 android:text="@string/curr_time"
                 android:textAlignment="center"
-                android:textColor="@android:color/black"
+                android:textColor="#212121"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:visibility="gone" />
@@ -65,11 +64,11 @@
                     android:layout_height="match_parent"
                     android:layout_weight="1"
                     android:clickable="false"
-                    android:fontFamily="@font/google_sans_regular"
+                    android:fontFamily="@font/open_sans"
                     android:gravity="center_vertical"
                     android:text="@string/def_tip"
                     android:textAlignment="center"
-                    android:textColor="@android:color/black"
+                    android:textColor="#212121"
                     android:textIsSelectable="false"
                     android:textSize="18sp"
                     android:visibility="visible" />
@@ -89,7 +88,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/google_sans_regular"
+                    android:fontFamily="@font/open_sans"
                     android:textAlignment="center"
                     android:textColor="#7986cb" />
 
@@ -98,7 +97,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/google_sans_regular"
+                    android:fontFamily="@font/open_sans"
                     android:textAlignment="center"
                     android:textColor="#5c6bc0" />
 
@@ -107,7 +106,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/google_sans_regular"
+                    android:fontFamily="@font/open_sans"
                     android:textAlignment="center"
                     android:textColor="#3f51b5" />
 
@@ -116,7 +115,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/google_sans_regular"
+                    android:fontFamily="@font/open_sans"
                     android:textAlignment="center"
                     android:textColor="#303f9f" />
 
@@ -125,7 +124,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:fontFamily="@font/google_sans_regular"
+                    android:fontFamily="@font/open_sans"
                     android:textAlignment="center"
                     android:textColor="#1a237e" />
             </LinearLayout>
