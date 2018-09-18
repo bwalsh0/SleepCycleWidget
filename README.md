@@ -6,6 +6,6 @@
      
 APK not public in the Google Play Store until v1.0
 
-For security purposes I have not included my Google Play billing .class file in the repository. If you would like to compile the app for personal use, remove any code that calls the billing activity to successfully compile the app. 
+For security purposes I have not included my Google Play billing .class file in the repository. If you would like to compile the app for personal use, remove any code that calls the billing activity to successfully compile the app and have full access to functionality.
 
 Planned release, October 2018
