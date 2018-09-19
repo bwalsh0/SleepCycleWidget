@@ -1,5 +1,6 @@
 package com.bryanwalsh.sleepcyclewidget;
 
+import android.app.Activity;
 import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
@@ -11,6 +12,10 @@ import java.util.Locale;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.v4.content.LocalBroadcastManager;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -20,6 +25,7 @@ import android.widget.Toast;
 
 public class SleepWidgetLIGHT extends AppWidgetProvider {
     private static final String onClick1 = "GET_TIME";
+    private static final String prefUpdate = "android.appwidget.action.APPWIDGET_UPDATE";
     public Context timeContext;
     public Intent timeIntent;
 
@@ -45,8 +51,14 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
     boolean toast_flag;
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
-
-        RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.sleep_widget_light);
+        int theme_id = Integer.parseInt(getDefaults("theme1", context));
+        int theme;
+        if (theme_id == 0) {
+            theme = R.layout.sleep_widget_light;
+        } else {
+            theme = R.layout.sleep_widget_dark;
+        }
+        RemoteViews views = new RemoteViews(context.getPackageName(), theme);
         int[] idArray = new int[]{appWidgetId};
 
         Intent intent = new Intent(context, SleepWidgetLIGHT.class);
@@ -62,7 +74,15 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
+//        int theme_id = Integer.parseInt(getDefaults("theme1", context));
+//        int theme;
+//        if (theme_id == 0) {
+//            theme = R.layout.sleep_widget_light;
+//        } else {
+//            theme = R.layout.sleep_widget_dark;
+//        }
+//        Log.e("theme_id from onUpdate", "" + theme_id);
+
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
@@ -70,47 +90,71 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        int theme_id = Integer.parseInt(getDefaults("theme1", context));
+        int theme;
+        if (theme_id == 0) {
+            theme = R.layout.sleep_widget_light;
+        } else {
+            theme = R.layout.sleep_widget_dark;
+        }
         super.onReceive(context, intent);
+
         timeIntent = intent;
         timeContext = context; //links context and intent updates to UpdateTime()
 
-        if (onClick1.equals(intent.getAction())){
+        //User Preferences
+        time_offset = Integer.parseInt(getDefaults("tts", context));
+        toast_flag = getDefaultBool("toast_flag", context);
+        curr_flag = getDefaultBool("curr_flag", context);
+        cycle_num = Integer.parseInt(getDefaults("cycle_amt", context)) + 3; //Partly hardcoded, fine now but fix later //Use an overloaded get() method
 
-            //User Preferences
-            time_offset = Integer.parseInt(getDefaults("tts", context));
-            cycle_num = Integer.parseInt(getDefaults("cycle_amt", context)) + 3; //Partly hardcoded, fine now but fix later //Use an overloaded get() method
-            curr_flag = getDefaultBool("curr_flag", context);
-            toast_flag = getDefaultBool("toast_flag", context);
-
+        if (onClick1.equals(intent.getAction())) {
                 if (time_offset >= 90) { //double check if user accidentally set offset too high
-                Toast.makeText(timeContext, "Are you sure it takes you " + time_offset + " minutes to sleep?" , Toast.LENGTH_LONG).show();
+                Toast.makeText(context, "Are you sure it takes you " + time_offset + " minutes to sleep?" , Toast.LENGTH_LONG).show();
                     ConvertTime(); //Moved into if statement to prevent double-run on init for efficiency
-                    UpdateTime(); //call helper
+                    UpdateTime(theme); //call helper
                 }
                 else {
                     ConvertTime();
-                    UpdateTime();
+                    UpdateTime(theme);
                     if (!toast_flag) {
                         Toast.makeText(context, "Time updated, sleep well!", Toast.LENGTH_SHORT).show();
                     }
                     //ToDo: Add option for 12h or 24h time style (after v1.0 release)
                 }
+        } else if (prefUpdate.equals(intent.getAction())) {
+                AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+                ComponentName AppWidget = new ComponentName(context.getPackageName(), SleepWidgetLIGHT.class.getName());
+                int[] appWidgetIds = appWidgetManager.getAppWidgetIds(AppWidget);
+                //Update misc. preferences
+                RemoteViews remoteViews = new RemoteViews(context.getPackageName(), theme);
+                remoteViews.setViewVisibility(R.id.default_ll, View.VISIBLE);
+                remoteViews.setViewVisibility(R.id.nextTimes_ll, View.GONE);
+                remoteViews.setViewVisibility(R.id.currTime, View.GONE);
+                //Restart widget instance
+                appWidgetManager.updateAppWidget(appWidgetIds, remoteViews); //Usage:
+                    for (int appWidgetId : appWidgetIds) {
+                        updateAppWidget(context, appWidgetManager, appWidgetId);
+                    }
+                Log.e("Pref. broadcast_rcv", "Updated, " + theme_id + ", (" + theme + ")");
         }
     }
 
-    public void UpdateTime() { //Helper for grabbing time -only- when clicked
+    public void UpdateTime(int theme) { //Helper for grabbing time -only- when clicked
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(timeContext);
             ComponentName AppWidget = new ComponentName(timeContext.getPackageName(), SleepWidgetLIGHT.class.getName());
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(AppWidget);
 
-            RemoteViews remoteViews = new RemoteViews(AppWidget.getPackageName(), R.layout.sleep_widget_light);
+            RemoteViews remoteViews = new RemoteViews(AppWidget.getPackageName(), theme);
             remoteViews.setTextViewText(R.id.currTime, time12);
+
             if (!curr_flag) {
                 remoteViews.setViewVisibility(R.id.currTime, View.VISIBLE);
             }
             remoteViews.setViewVisibility(R.id.default_ll, View.GONE);
             remoteViews.setViewVisibility(R.id.nextTimes_ll, View.VISIBLE);
-            //nextTimes
+
+            //TODO: I should probably optimize these
             if (cycle_num == 5) {
                 remoteViews.setTextViewText(R.id.nT1, nextTime1);
                 remoteViews.setTextViewText(R.id.nT2, nextTime2);
@@ -185,27 +229,23 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
         calendar.add(Calendar.MINUTE, 90 + time_offset);
         nextTime1 = ShortenString(AppendHour(calendar.get(Calendar.HOUR)) + ":" +
                 AppendMin(calendar.get(Calendar.MINUTE)) + GetMeridiem());                               //TODO: Find a way to incorporate ConvertTimes() for min < 10
-        Log.e("NextTime1", nextTime1);
 
         calendar.add(Calendar.MINUTE, 90);
         nextTime2 = ShortenString(AppendHour(calendar.get(Calendar.HOUR)) + ":" +
                 AppendMin(calendar.get(Calendar.MINUTE)) + GetMeridiem());
-        Log.e("NextTime2", nextTime2);
 
         calendar.add(Calendar.MINUTE, 90);
         nextTime3 = ShortenString(AppendHour(calendar.get(Calendar.HOUR)) + ":" +
                 AppendMin(calendar.get(Calendar.MINUTE)) + GetMeridiem());
-        Log.e("NextTime3", nextTime3);
 
         calendar.add(Calendar.MINUTE, 90);
         nextTime4 = ShortenString(AppendHour(calendar.get(Calendar.HOUR)) + ":" +
                 AppendMin(calendar.get(Calendar.MINUTE)) + GetMeridiem());
-        Log.e("NextTime4", nextTime4);
 
         calendar.add(Calendar.MINUTE, 90);
         nextTime5 = ShortenString(AppendHour(calendar.get(Calendar.HOUR)) + ":" +
                 AppendMin(calendar.get(Calendar.MINUTE)) + GetMeridiem());
-        Log.e("NextTime5", nextTime5);
+        Log.e("NextTimes:", nextTime1 + ", " + nextTime2 + ", " + nextTime3 + ", " + nextTime4 + ", " + nextTime5);
 
         //ShortenString();
         //TODO: Append Cycle #'s to each time

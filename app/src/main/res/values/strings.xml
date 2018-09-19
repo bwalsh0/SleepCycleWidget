@@ -7,9 +7,10 @@
     <string name="sleepDescrip">sleepDescrip</string>
     <string name="def_tip">Calculate Wakeup Times</string>
     <string name="curr_time"></string>
+    <string name="pref_disclaimer"></string>
     <string name="howto">To add a widget, press and hold a space on your home screen and select
         &quot;Widgets&quot;.</string>
-    <string name="version">Bryan Walsh (v0.9)</string>
+    <string name="version">Bryan Walsh (v0.9.5)</string>
 
     <string name="disclaimer">It takes the average person 15 minutes to enter a sleep cycle.
         By default, this amount is added in the calculation. Configure your personal
@@ -24,7 +25,6 @@
     <string name="pref_title_social_recommendations">Enable social recommendations</string>
 
     <string name="pref_title_display_name">Display name</string>
-    <string name="pref_default_display_name">John Smith</string>
 
     <string name="cycle_num">Number of cycles to display</string>
     <string-array name="cycle_num_list">
@@ -33,6 +33,18 @@
         <item>5</item>
     </string-array>
     <string-array name="cycle_num_values">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+    </string-array>
+
+    <string name="themes">Widget theme</string>
+    <string-array name="themes_list">
+        <item>Blue (Default)</item>
+        <item>Dark</item>
+        <item>Pearl</item>
+    </string-array>
+    <string-array name="themes_index">
         <item>0</item>
         <item>1</item>
         <item>2</item>

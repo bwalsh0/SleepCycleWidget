@@ -10,17 +10,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.View;
 
+import static java.awt.font.TextAttribute.FONT;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         CollapsingToolbarLayout toolbar = findViewById(R.id.collapse);
 
         //Collapsing Toolbar Title Formatting
-        final Typeface tf = Typeface.create("open-sans", Typeface.NORMAL);
+        final Typeface tf = Typeface.createFromAsset(getAssets(), "fonts/open_sans.ttf");
 
         //Expanded and Collapsed modifiers
         toolbar.setCollapsedTitleTypeface(tf);
@@ -29,7 +30,6 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setExpandedTitleGravity(Gravity.BOTTOM|Gravity.CENTER_HORIZONTAL);
 
         getWindow().setNavigationBarColor(getResources().getColor(R.color.colorPrimary));
-
         FloatingActionButton fab = findViewById(R.id.config_fab);
         fab.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

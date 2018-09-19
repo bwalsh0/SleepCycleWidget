@@ -67,13 +67,14 @@
             android:summaryOn="Toast will not be displayed"
             android:title="Hide toast message on time update" />
         <ListPreference
-            android:capitalize="words"
-            android:defaultValue="@string/pref_default_display_name"
-            android:enabled="false"
-            android:key="theme"
-            android:maxLines="2"
-            android:singleLine="true"
-            android:summary="Coming Soon"
+            android:defaultValue="0"
+            android:key="theme1"
+            android:summary="Blue"
+            android:negativeButtonText="@null"
+            android:positiveButtonText="@null"
+            android:dialogTitle="Widget themes"
+            android:entries="@array/themes_list"
+            android:entryValues="@array/themes_index"
             android:title="Theme" />
         />
     </PreferenceCategory>

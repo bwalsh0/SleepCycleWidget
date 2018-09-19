@@ -50,11 +50,19 @@
         <activity
             android:name="com.bryanwalsh.sleepcyclewidget.WidgetConfigurePreferences"
             android:label="@string/title_activity_widget_configure_preferences"
-            android:theme="@style/PreferenceScreen"></activity>
-        <activity android:name="com.bryanwalsh.sleepcyclewidget.AboutActivity"
-            android:parentActivityName=".WidgetConfigurePreferences" >
+            android:theme="@style/PreferenceScreen"
+            android:launchMode="singleTop">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="android.appwidget.action.EXTRA_APPWIDGET_IDS" />
+            </intent-filter>
         </activity>
-        <activity android:name="com.bryanwalsh.sleepcyclewidget.PurchaseActivity"/>
+        <activity android:name="com.bryanwalsh.sleepcyclewidget.AboutActivity"
+            android:parentActivityName="com.bryanwalsh.sleepcyclewidget.WidgetConfigurePreferences" >
+        </activity>
+        <activity android:name="com.bryanwalsh.sleepcyclewidget.PurchaseActivity"
+            android:parentActivityName="com.bryanwalsh.sleepcyclewidget.WidgetConfigurePreferences" >
+            </activity>
     </application>
-
+<!--TODO: App indexing-->
 </manifest>

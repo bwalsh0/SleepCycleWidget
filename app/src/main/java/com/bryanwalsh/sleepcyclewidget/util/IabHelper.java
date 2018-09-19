@@ -193,6 +193,9 @@ public class IabHelper {
         mDebugLog = enable;
     }
 
+    public void queryInventoryAsync(boolean b, QueryInventoryFinishedListener mReceivedInventoryListener) {
+    }
+
     /**
      * Callback for setup process. This listener's {@link #onIabSetupFinished} method is called
      * when the setup process is complete.

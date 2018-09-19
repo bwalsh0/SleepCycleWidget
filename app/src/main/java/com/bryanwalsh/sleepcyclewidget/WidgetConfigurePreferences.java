@@ -1,6 +1,9 @@
 package com.bryanwalsh.sleepcyclewidget;
 
 import android.annotation.TargetApi;
+import android.app.Activity;
+import android.app.PendingIntent;
+import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -11,15 +14,29 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
+
+import com.bryanwalsh.sleepcyclewidget.util.IabHelper;
+import com.bryanwalsh.sleepcyclewidget.util.IabResult;
+import com.bryanwalsh.sleepcyclewidget.util.Inventory;
+import com.bryanwalsh.sleepcyclewidget.util.Purchase;
 
 import java.util.List;
 
+import static com.bryanwalsh.sleepcyclewidget.PurchaseActivity.ITEM_SKU;
+import static com.bryanwalsh.sleepcyclewidget.PurchaseActivity.billingRsa;
+
 public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
+
+    static Boolean flag;
+    static IabHelper mHelper;
 
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
@@ -31,7 +48,7 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
                 int index = listPreference.findIndexOfValue(stringValue);
                 preference.setSummary(
                         index >= 0
-                                ? listPreference.getEntries()[index] + " cycles"
+                                ? listPreference.getEntries()[index]
                                 : null );
                 return true;
             }
@@ -91,6 +108,9 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setupActionBar();
+
+        SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(this);
+        prefs.registerOnSharedPreferenceChangeListener(listener);
     }
 
     /**
@@ -140,8 +160,47 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
             addPreferencesFromResource(R.xml.pref_general);
             setHasOptionsMenu(true);
 
+            Preference themeEnable = findPreference("theme1");
+            themeEnable.setEnabled(false);
+            themeEnable.setSummary("Upgrade to unlock themes");
+
+            mHelper = new IabHelper(getContext(), billingRsa);
+
+            final IabHelper.QueryInventoryFinishedListener mReceivedInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
+                public void onQueryInventoryFinished(IabResult result, Inventory inv) throws IabHelper.IabAsyncInProgressException {
+                    Log.e("queryInv", "Query inventory finished.");
+                    if (result.isFailure()) {
+                        Log.e("Failed to query inv", "" + result);
+                        return;
+                    }
+                    flag = inv.hasPurchase(ITEM_SKU);
+                    Log.e("flag is","" + flag);
+                    if (!flag) {
+                        getPreferenceScreen().findPreference("theme1").setSummary("Upgrade to unlock themes");
+                    }
+                    getPreferenceScreen().findPreference("theme1").setEnabled(flag);
+                }
+            };
+
+            mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
+                @Override
+                public void onIabSetupFinished(IabResult result) {
+                    if (!result.isSuccess()) {
+                        return;
+                    } else {
+                        try {
+                            mHelper.queryInventoryAsync(mReceivedInventoryListener);
+                        } catch (IabHelper.IabAsyncInProgressException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
+            });
+
             bindPreferenceSummaryToValue(findPreference("tts"));
             bindPreferenceSummaryToValue(findPreference("cycle_amt"));
+            bindPreferenceSummaryToValue(findPreference("theme1"));
+
             CheckBoxPreference toast_flag = (CheckBoxPreference) findPreference("toast_flag");
             CheckBoxPreference curr_flag = (CheckBoxPreference)findPreference("curr_flag");
 
@@ -166,7 +225,6 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
                     return true;
                 }
             });
-
         }
 
         @Override
@@ -239,4 +297,15 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
             return super.onOptionsItemSelected(item);
         }
     }
+
+    SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+        public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+            Intent intent = new Intent();
+            intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
+            sendBroadcast(intent);
+            if (key.matches("theme1")) {
+                Snackbar.make(getListView(), Html.fromHtml("<font color=\"#FFAAB6FE\">Theme applied</font>"), Snackbar.LENGTH_SHORT).show();
+            }
+        }
+    };
 }

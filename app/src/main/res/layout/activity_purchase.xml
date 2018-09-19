@@ -7,32 +7,32 @@
     android:orientation="vertical"
     tools:context=".PurchaseActivity">
 
-    <!--<android.support.v7.widget.Toolbar-->
-        <!--android:id="@+id/toolbar"-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="128dp"-->
-        <!--android:background="@color/colorPrimary"-->
-        <!--android:elevation="4dp"-->
-        <!--android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
-        <!--app:popupTheme="@style/ThemeOverlay.AppCompat.Light">-->
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
 
-        <!--<TextView-->
-            <!--android:id="@+id/toolbar_title"-->
-            <!--android:layout_width="wrap_content"-->
-            <!--android:layout_height="match_parent"-->
-            <!--android:layout_gravity="center_horizontal"-->
-            <!--android:layout_marginTop="16dp"-->
-            <!--android:fontFamily="@font/"-->
-            <!--android:text="Unlock Pro Features"-->
-            <!--android:textColor="@android:color/black"-->
-            <!--android:textSize="20sp" />-->
-    <!--</android.support.v7.widget.Toolbar>-->
+        <TextView
+            android:id="@+id/toolbar_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center_horizontal|top"
+            android:layout_marginTop="16dp"
+            android:fontFamily="@font/open_sans"
+            android:text="Unlock Pro Features"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+    </android.support.v7.widget.Toolbar>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar"
-        android:layout_marginTop="-72dp"
+        android:layout_marginTop="-74dp"
         android:clipToPadding="false"
         android:elevation="8dp"
         android:isScrollContainer="true">
@@ -60,10 +60,11 @@
                     android:orientation="vertical">
 
                     <ImageView
+                        android:id="@+id/feature"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
+                        android:layout_height="156dp"
                         android:adjustViewBounds="true"
-                        android:scaleType="fitStart"
+                        android:scaleType="center"
                         android:src="@drawable/backdrop"
                         tools:ignore="ContentDescription" />
 
@@ -79,16 +80,20 @@
                             android:id="@+id/title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:fontFamily="@font/open_sans_semibold"
                             android:gravity="center_vertical"
                             android:paddingTop="24dp"
                             android:paddingBottom="16dp"
                             android:text="Sleep Cycle Widget +"
+                            android:textColor="@color/darkest_gray"
                             android:textSize="18sp" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Desc. 1\n\nDesc. 2\nThank you,\nBryan Walsh" />
+                            android:fontFamily="@font/open_sans"
+                            android:text="Unlocks widget themes and disables ads.\n\nEven if you decide not to upgrade, I appreciate any feedback and support for development.\n\nThank you,\nBryan Walsh"
+                            android:textColor="@color/darkest_gray" />
                     </LinearLayout>
 
                     <LinearLayout

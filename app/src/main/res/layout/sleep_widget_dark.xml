@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:layout_margin="8dp"
     android:background="@android:drawable/editbox_background_normal"
-    android:backgroundTint="#aab6fe"
+    android:backgroundTint="#1b1b1b"
     android:padding="4dp">
 
     <LinearLayout
@@ -22,12 +22,12 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:layout_weight="3.2"
-            android:backgroundTint="#7986cb"
+            android:backgroundTint="#424242"
             android:contentDescription="button"
             android:elevation="0dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_round_snooze_24px"
-            android:tint="#212121" />
+            android:tint="#e0e0e0" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -45,7 +45,7 @@
                 android:fontFamily="@font/open_sans"
                 android:text="@string/curr_time"
                 android:textAlignment="center"
-                android:textColor="#212121"
+                android:textColor="#e0e0e0"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 android:visibility="gone" />
@@ -68,7 +68,7 @@
                     android:gravity="center_vertical"
                     android:text="@string/def_tip"
                     android:textAlignment="center"
-                    android:textColor="#212121"
+                    android:textColor="#e0e0e0"
                     android:textIsSelectable="false"
                     android:textSize="18sp"
                     android:visibility="visible" />
@@ -91,7 +91,7 @@
                     android:fontFamily="@font/open_sans"
                     android:lineSpacingExtra="-3dp"
                     android:textAlignment="center"
-                    android:textColor="#7986cb" />
+                    android:textColor="#64b5f6" />
 
                 <TextView
                     android:id="@+id/nT2"
@@ -101,7 +101,7 @@
                     android:fontFamily="@font/open_sans"
                     android:lineSpacingExtra="-3dp"
                     android:textAlignment="center"
-                    android:textColor="#5c6bc0" />
+                    android:textColor="#42a5f5" />
 
                 <TextView
                     android:id="@+id/nT3"
@@ -111,7 +111,7 @@
                     android:fontFamily="@font/open_sans"
                     android:lineSpacingExtra="-3dp"
                     android:textAlignment="center"
-                    android:textColor="#3f51b5" />
+                    android:textColor="#2196f3" />
 
                 <TextView
                     android:id="@+id/nT4"
@@ -121,7 +121,7 @@
                     android:fontFamily="@font/open_sans"
                     android:lineSpacingExtra="-3dp"
                     android:textAlignment="center"
-                    android:textColor="#303f9f" />
+                    android:textColor="#1e88e5" />
 
                 <TextView
                     android:id="@+id/nT5"
@@ -131,7 +131,7 @@
                     android:fontFamily="@font/open_sans"
                     android:lineSpacingExtra="-3dp"
                     android:textAlignment="center"
-                    android:textColor="#1a237e" />
+                    android:textColor="#1e88e5" />
             </LinearLayout>
 
         </LinearLayout>

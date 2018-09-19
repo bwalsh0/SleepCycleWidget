@@ -15,12 +15,6 @@ import android.widget.EditText;
 import android.widget.RemoteViews;
 import android.widget.TextView;
 
-/** (v0.6 CHANGE 8/31/2018)
- THIS CONFIG CLASS NEVER HAS ITS LAYOUT INFLATED
- It is only used as a helper class for MainActivity to create the widget based on user-defined settings.
- I have removed this layout from active layouts to get rid of redundant screens and simplify the
- widget creation process.
-**/
 public class SleepWidgetLIGHTConfigureActivity extends AppCompatActivity {
 
     private static final String PREFS_NAME = "com.bryanwalsh.sleeptimewidget2.SleepWidgetLIGHT";
@@ -38,12 +32,6 @@ public class SleepWidgetLIGHTConfigureActivity extends AppCompatActivity {
             saveTitlePref(context, mAppWidgetId, widgetText);
 
             // It is the responsibility of the configuration activity to update the app widget
-            AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-
-            RemoteViews views = new RemoteViews(context.getPackageName(),
-                    R.layout.sleep_widget_light);
-            appWidgetManager.updateAppWidget(mAppWidgetId, views);
-            SleepWidgetLIGHT.updateAppWidget(context, appWidgetManager, mAppWidgetId);
 
             // Make sure we pass back the original appWidgetId
             Intent resultValue = new Intent();
@@ -93,8 +81,6 @@ public class SleepWidgetLIGHTConfigureActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
-        // Set the result to CANCELED.  This will cause the widget host to cancel
-        // out of the widget placement if the user presses the back button.
         setResult(RESULT_CANCELED);
 
         setContentView(R.layout.sleep_widget_light_configure);
@@ -119,7 +105,6 @@ public class SleepWidgetLIGHTConfigureActivity extends AppCompatActivity {
                     AppWidgetManager.EXTRA_APPWIDGET_ID, AppWidgetManager.INVALID_APPWIDGET_ID);
         }
 
-        // If this activity was started with an intent without an app widget ID, finish with an error.
         if (mAppWidgetId == AppWidgetManager.INVALID_APPWIDGET_ID) {
             finish();
             return;
