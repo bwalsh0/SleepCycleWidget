@@ -43,11 +43,17 @@
         <item>Blue (Default)</item>
         <item>Dark</item>
         <item>Pearl</item>
+        <item>Champagne</item>
+        <item>Blue (Rounded alternative)</item>
+        <item>Dark (Rounded alternative)</item>
     </string-array>
     <string-array name="themes_index">
         <item>0</item>
         <item>1</item>
         <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
     </string-array>
 
     <!-- Example settings for Data & Sync -->

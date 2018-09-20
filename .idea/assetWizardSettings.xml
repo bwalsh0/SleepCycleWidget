@@ -47,9 +47,11 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="foregroundImage" value="C:\Users\Bryan Walsh\Downloads\icons (1)\icons\mipmap-xxxhdpi\ic_launcher.png" />
+                                      <entry key="backgroundImage" value="C:\Users\Bryan Walsh\Downloads\icons (1)\icons\playstore\icon.png" />
+                                      <entry key="foregroundImage" value="C:\Users\Bryan Walsh\Downloads\icons (1)\icons\playstore\icon.png" />
                                       <entry key="previewDensity" value="XXXHIGH" />
                                       <entry key="showGrid" value="true" />
+                                      <entry key="showSafeZone" value="false" />
                                     </map>
                                   </option>
                                 </PersistentState>

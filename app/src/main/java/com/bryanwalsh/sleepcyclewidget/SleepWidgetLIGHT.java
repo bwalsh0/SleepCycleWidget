@@ -51,12 +51,34 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
     boolean toast_flag;
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
-        int theme_id = Integer.parseInt(getDefaults("theme1", context));
-        int theme;
-        if (theme_id == 0) {
-            theme = R.layout.sleep_widget_light;
-        } else {
-            theme = R.layout.sleep_widget_dark;
+        int theme_id = 0;
+        try {
+            theme_id = Integer.parseInt(getDefaults("theme1", context));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        int theme = R.layout.sleep_widget_light;
+        switch(theme_id) {
+            case 0:
+                theme = R.layout.sleep_widget_light;
+                break;
+            case 1:
+                theme = R.layout.sleep_widget_dark;
+                break;
+            case 2:
+                theme = R.layout.sleep_widget_pearl;
+                break;
+            case 3:
+                theme = R.layout.sleep_widget_champagne;
+                break;
+            case 4:
+                theme = R.layout.sleep_widget_light_rounded;
+                break;
+            case 5:
+                theme = R.layout.sleep_widget_dark_rounded;
+                break;
+            default:
+                theme = R.layout.sleep_widget_light;
         }
         RemoteViews views = new RemoteViews(context.getPackageName(), theme);
         int[] idArray = new int[]{appWidgetId};
@@ -74,14 +96,6 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-//        int theme_id = Integer.parseInt(getDefaults("theme1", context));
-//        int theme;
-//        if (theme_id == 0) {
-//            theme = R.layout.sleep_widget_light;
-//        } else {
-//            theme = R.layout.sleep_widget_dark;
-//        }
-//        Log.e("theme_id from onUpdate", "" + theme_id);
 
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
@@ -90,12 +104,34 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        int theme_id = Integer.parseInt(getDefaults("theme1", context));
-        int theme;
-        if (theme_id == 0) {
-            theme = R.layout.sleep_widget_light;
-        } else {
-            theme = R.layout.sleep_widget_dark;
+        int theme_id = 0;
+        try {
+            theme_id = Integer.parseInt(getDefaults("theme1", context));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+        int theme = R.layout.sleep_widget_light;
+        switch(theme_id) {
+            case 0:
+                theme = R.layout.sleep_widget_light;
+                break;
+            case 1:
+                theme = R.layout.sleep_widget_dark;
+                break;
+            case 2:
+                theme = R.layout.sleep_widget_pearl;
+                break;
+            case 3:
+                theme = R.layout.sleep_widget_champagne;
+                break;
+            case 4:
+                theme = R.layout.sleep_widget_light_rounded;
+                break;
+            case 5:
+                theme = R.layout.sleep_widget_dark_rounded;
+                break;
+            default:
+                theme = R.layout.sleep_widget_light;
         }
         super.onReceive(context, intent);
 
