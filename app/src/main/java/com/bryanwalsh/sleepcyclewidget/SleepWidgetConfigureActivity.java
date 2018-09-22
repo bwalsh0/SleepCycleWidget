@@ -12,19 +12,18 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
-import android.widget.RemoteViews;
 import android.widget.TextView;
 
-public class SleepWidgetLIGHTConfigureActivity extends AppCompatActivity {
+public class SleepWidgetConfigureActivity extends AppCompatActivity {
 
-    private static final String PREFS_NAME = "com.bryanwalsh.sleeptimewidget2.SleepWidgetLIGHT";
+    private static final String PREFS_NAME = "com.bryanwalsh.sleeptimewidget2.SleepWidgetProvider";
     private static final String PREF_PREFIX_KEY = "appwidget_";
     int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     EditText mAppWidgetText;
 
     View.OnClickListener mOnClickListener = new View.OnClickListener() {
         public void onClick(View v) {
-            final Context context = SleepWidgetLIGHTConfigureActivity.this;
+            final Context context = SleepWidgetConfigureActivity.this;
 
             // When the button is clicked, store the string locally
             mAppWidgetText = findViewById(R.id.appwidget_text);
@@ -49,7 +48,7 @@ public class SleepWidgetLIGHTConfigureActivity extends AppCompatActivity {
         }
     };
 
-    public SleepWidgetLIGHTConfigureActivity() {
+    public SleepWidgetConfigureActivity() {
         super();
     }
 
@@ -110,7 +109,7 @@ public class SleepWidgetLIGHTConfigureActivity extends AppCompatActivity {
             return;
         }
 
-        mAppWidgetText.setText(loadTitlePref(SleepWidgetLIGHTConfigureActivity.this, mAppWidgetId));
+        mAppWidgetText.setText(loadTitlePref(SleepWidgetConfigureActivity.this, mAppWidgetId));
     }
 }
 

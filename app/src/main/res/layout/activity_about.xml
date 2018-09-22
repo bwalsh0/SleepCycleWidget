@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/AppTheme"
+    android:orientation="vertical"
     tools:context=".AboutActivity">
 
     <android.support.v7.widget.Toolbar
@@ -12,10 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:elevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:elevation="2dp">
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -23,82 +19,21 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center|left"
             android:fontFamily="@font/open_sans"
-            android:text="About the app"
+            android:text="About"
             android:textColor="@android:color/black"
             android:textSize="20sp"
             tools:layout_editor_absoluteX="125dp"
             tools:layout_editor_absoluteY="13dp" />
     </android.support.v7.widget.Toolbar>
 
-    <ImageView
-        android:id="@+id/icon"
-        android:layout_width="128dp"
-        android:layout_height="128dp"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="128dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title"
-        app:srcCompat="@drawable/sleep_widget_icon" />
-
-    <ImageView
-        android:id="@+id/gith"
-        android:layout_width="0dp"
-        android:layout_height="64dp"
-        android:layout_marginStart="160dp"
-        android:layout_marginEnd="160dp"
-        android:layout_marginBottom="48dp"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/ic_github_logo" />
-
-    <TextView
-        android:id="@+id/title"
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="96dp"
-        android:layout_marginEnd="31dp"
-        android:fontFamily="@font/open_sans"
-        android:text="Sleep Cycle Widget"
-        android:textColor="@color/colorPrimaryDark"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:clipToPadding="false"
+        android:isScrollContainer="true">
 
-    <TextView
-        android:id="@+id/desc"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="30dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="30dp"
-        android:fontFamily="@font/open_sans"
-        android:text="A project dedicated to making waking up easier.\nby Bryan Walsh"
-        android:textAlignment="center"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/icon"
-        app:lineHeight="36dp" />
+        <include layout="@layout/about_all_incl" />
 
-    <TextView
-        android:id="@+id/gitFooter"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="67dp"
-        android:layout_marginEnd="67dp"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@font/open_sans"
-        android:text="Check out my other projects on Github!"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-</android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
-<!--Github Image Credits: Dave Gandy https://www.flaticon.com/authors/dave-gandy-->
+</LinearLayout>

@@ -75,7 +75,7 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
                         .getString(preference.getKey(), ""));
     }
 
-    private static final String PREFS_NAME = "com.bryanwalsh.sleeptimewidget2.SleepWidgetLIGHT";
+    private static final String PREFS_NAME = "com.bryanwalsh.sleeptimewidget2.SleepWidgetProvider";
     private static final String PREF_PREFIX_KEY = "appwidget_";
 
     public WidgetConfigurePreferences() {

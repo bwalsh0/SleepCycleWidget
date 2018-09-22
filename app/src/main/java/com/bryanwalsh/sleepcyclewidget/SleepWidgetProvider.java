@@ -1,7 +1,8 @@
 package com.bryanwalsh.sleepcyclewidget;
 
-import android.app.Activity;
+import android.app.AlarmManager;
 import android.app.PendingIntent;
+import android.app.TimePickerDialog;
 import android.appwidget.AppWidgetManager;
 import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
@@ -12,19 +13,17 @@ import java.util.Locale;
 
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v4.content.LocalBroadcastManager;
-import android.text.Html;
-import android.text.SpannableString;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 //ToDo: Change app name to SleepCycleWidget
 
-public class SleepWidgetLIGHT extends AppWidgetProvider {
+public class SleepWidgetProvider extends AppWidgetProvider {
     private static final String onClick1 = "GET_TIME";
+    private static final String onClick2 = "ADD_ALARM";
     private static final String prefUpdate = "android.appwidget.action.APPWIDGET_UPDATE";
     public Context timeContext;
     public Intent timeIntent;
@@ -50,6 +49,9 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
     boolean curr_flag;
     boolean toast_flag;
 
+    //Alarm Broadcast Values
+    final static int ABR = 1;
+
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
         int theme_id = 0;
         try {
@@ -57,13 +59,13 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        int theme = R.layout.sleep_widget_light;
+        int theme = R.layout.sleep_widget_light_rounded;
         switch(theme_id) {
             case 0:
-                theme = R.layout.sleep_widget_light;
+                theme = R.layout.sleep_widget_light_rounded;
                 break;
             case 1:
-                theme = R.layout.sleep_widget_dark;
+                theme = R.layout.sleep_widget_dark_rounded;
                 break;
             case 2:
                 theme = R.layout.sleep_widget_pearl;
@@ -72,24 +74,25 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
                 theme = R.layout.sleep_widget_champagne;
                 break;
             case 4:
-                theme = R.layout.sleep_widget_light_rounded;
+                theme = R.layout.sleep_widget_light;
                 break;
             case 5:
-                theme = R.layout.sleep_widget_dark_rounded;
+                theme = R.layout.sleep_widget_dark;
                 break;
             default:
-                theme = R.layout.sleep_widget_light;
+                theme = R.layout.sleep_widget_light_rounded;
         }
         RemoteViews views = new RemoteViews(context.getPackageName(), theme);
         int[] idArray = new int[]{appWidgetId};
 
-        Intent intent = new Intent(context, SleepWidgetLIGHT.class);
+        Intent intent = new Intent(context, SleepWidgetProvider.class);
         intent.setAction(onClick1);
         intent.putExtra("appWidgetId", appWidgetId);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_IDS, idArray);
         intent.putExtra(AppWidgetManager.ACTION_APPWIDGET_UPDATE, idArray);
 
         views.setOnClickPendingIntent(R.id.sleep, PendingIntent.getBroadcast(context,0, intent, PendingIntent.FLAG_UPDATE_CURRENT));
+        views.setOnClickPendingIntent(R.id.nT1, PendingIntent.getBroadcast(context, 0, intent.setAction(onClick2), PendingIntent.FLAG_UPDATE_CURRENT));
 
         appWidgetManager.updateAppWidget(appWidgetId, views);
     }
@@ -110,13 +113,13 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
         } catch (NumberFormatException e) {
             e.printStackTrace();
         }
-        int theme = R.layout.sleep_widget_light;
+        int theme = R.layout.sleep_widget_light_rounded;
         switch(theme_id) {
             case 0:
-                theme = R.layout.sleep_widget_light;
+                theme = R.layout.sleep_widget_light_rounded;
                 break;
             case 1:
-                theme = R.layout.sleep_widget_dark;
+                theme = R.layout.sleep_widget_dark_rounded;
                 break;
             case 2:
                 theme = R.layout.sleep_widget_pearl;
@@ -125,13 +128,13 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
                 theme = R.layout.sleep_widget_champagne;
                 break;
             case 4:
-                theme = R.layout.sleep_widget_light_rounded;
+                theme = R.layout.sleep_widget_light;
                 break;
             case 5:
-                theme = R.layout.sleep_widget_dark_rounded;
+                theme = R.layout.sleep_widget_dark;
                 break;
             default:
-                theme = R.layout.sleep_widget_light;
+                theme = R.layout.sleep_widget_light_rounded;
         }
         super.onReceive(context, intent);
 
@@ -158,9 +161,15 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
                     }
                     //ToDo: Add option for 12h or 24h time style (after v1.0 release)
                 }
-        } else if (prefUpdate.equals(intent.getAction())) {
+        }
+
+        else if (onClick2.equals(intent.getAction())) {
+            openTimePickerDialog(context);
+        }
+
+        else if (prefUpdate.equals(intent.getAction())) {
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-                ComponentName AppWidget = new ComponentName(context.getPackageName(), SleepWidgetLIGHT.class.getName());
+                ComponentName AppWidget = new ComponentName(context.getPackageName(), SleepWidgetProvider.class.getName());
                 int[] appWidgetIds = appWidgetManager.getAppWidgetIds(AppWidget);
                 //Update misc. preferences
                 RemoteViews remoteViews = new RemoteViews(context.getPackageName(), theme);
@@ -178,7 +187,7 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
 
     public void UpdateTime(int theme) { //Helper for grabbing time -only- when clicked
             AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(timeContext);
-            ComponentName AppWidget = new ComponentName(timeContext.getPackageName(), SleepWidgetLIGHT.class.getName());
+            ComponentName AppWidget = new ComponentName(timeContext.getPackageName(), SleepWidgetProvider.class.getName());
             int[] appWidgetIds = appWidgetManager.getAppWidgetIds(AppWidget);
 
             RemoteViews remoteViews = new RemoteViews(AppWidget.getPackageName(), theme);
@@ -262,6 +271,9 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
     public void NextTimes(){
         //cycle length = 90m + time_offset (time til sleep)
 
+        int[] nextHours;
+        int[] nextMins;
+
         calendar.add(Calendar.MINUTE, 90 + time_offset);
         nextTime1 = ShortenString(AppendHour(calendar.get(Calendar.HOUR)) + ":" +
                 AppendMin(calendar.get(Calendar.MINUTE)) + GetMeridiem());                               //TODO: Find a way to incorporate ConvertTimes() for min < 10
@@ -305,6 +317,45 @@ public class SleepWidgetLIGHT extends AppWidgetProvider {
             result.append(temp);
         }
         return result.toString();
+    }
+
+    private void openTimePickerDialog(Context context) {
+        TimePickerDialog timePickerDialog = new TimePickerDialog(context,
+                onTimeSetListener, 12, 30, false);
+        timePickerDialog.setTitle("Set Alarm Time");
+
+        timePickerDialog.show();
+    }
+    TimePickerDialog.OnTimeSetListener onTimeSetListener = new TimePickerDialog.OnTimeSetListener() {
+
+        @Override
+        public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+
+            Calendar calNow = Calendar.getInstance();
+            Calendar calSet = (Calendar) calNow.clone();
+
+            calSet.set(Calendar.HOUR_OF_DAY, hourOfDay);
+            calSet.set(Calendar.MINUTE, minute);
+            calSet.set(Calendar.SECOND, 0);
+            calSet.set(Calendar.MILLISECOND, 0);
+
+            if (calSet.compareTo(calNow) <= 0) {
+                // Today Set time passed, count to tomorrow
+                calSet.add(Calendar.DATE, 1);
+            }
+
+            setAlarm(calSet);
+        }
+    };
+
+    private void setAlarm(Calendar targetCal) {
+
+        Intent intent = new Intent(timeContext, addAlarmActivity.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(
+                timeContext, ABR, intent, 0);
+        AlarmManager alarmManager = (AlarmManager) timeContext.getSystemService(Context.ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, targetCal.getTimeInMillis(),
+                pendingIntent);
     }
 
     public static String getDefaults(String key, Context context) {

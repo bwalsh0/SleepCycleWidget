@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
+    android:theme="@style/AppTheme"
     tools:context=".PurchaseActivity">
 
     <android.support.v7.widget.Toolbar
@@ -52,7 +53,9 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 app:cardBackgroundColor="@android:color/transparent"
-                app:cardUseCompatPadding="true">
+                app:cardUseCompatPadding="true"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="1dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -80,20 +83,20 @@
                             android:id="@+id/title"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/open_sans_semibold"
                             android:gravity="center_vertical"
                             android:paddingTop="24dp"
                             android:paddingBottom="16dp"
                             android:text="Sleep Cycle Widget +"
-                            android:textColor="@color/darkest_gray"
-                            android:textSize="18sp" />
+                            android:textColor="@color/dark_text"
+                            android:textSize="20sp" />
 
                         <TextView
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:fontFamily="@font/open_sans"
-                            android:text="Unlocks widget themes and disables ads.\n\nEven if you decide not to upgrade, I appreciate any feedback and support for development.\n\nThank you,\nBryan Walsh"
-                            android:textColor="@color/darkest_gray" />
+                            android:fontFamily="@font/open_sans_light"
+                            android:text="Unlocks widget themes and disables ads.\n\nEvery bit helps a college student. Even if you decide not to upgrade, I appreciate any feedback and support.\n\nThank you,\nBryan Walsh"
+                            android:textColor="@color/dark_text"
+                            android:textSize="16sp" />
                     </LinearLayout>
 
                     <LinearLayout

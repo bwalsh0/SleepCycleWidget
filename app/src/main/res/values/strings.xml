@@ -8,9 +8,10 @@
     <string name="def_tip">Calculate Wakeup Times</string>
     <string name="curr_time"></string>
     <string name="pref_disclaimer"></string>
-    <string name="howto">To add a widget, press and hold a space on your home screen and select
-        &quot;Widgets&quot;.</string>
-    <string name="version">Bryan Walsh (v0.9.5)</string>
+    <string name="howto">To add a widget, press and hold a space on your home screen and tap
+        \"Widgets\".</string>
+    <string name="version">Bryan Walsh (v1.0.0)</string>
+    <string name="versionShort">1.0.0</string>
 
     <string name="disclaimer">It takes the average person 15 minutes to enter a sleep cycle.
         By default, this amount is added in the calculation. Configure your personal
@@ -44,8 +45,8 @@
         <item>Dark</item>
         <item>Pearl</item>
         <item>Champagne</item>
-        <item>Blue (Rounded alternative)</item>
-        <item>Dark (Rounded alternative)</item>
+        <item>Blue (Square Alternative)</item>
+        <item>Dark (Square Alternative)</item>
     </string-array>
     <string-array name="themes_index">
         <item>0</item>
@@ -102,4 +103,14 @@
     <string name="pref_ringtone_silent">Silent</string>
 
     <string name="pref_title_vibrate">Vibrate</string>
+    <string name="title_activity_google_interstitial">GoogleInterstitial</string>
+
+    <string name="interstitial_ad_sample">Interstitial Ad Sample</string>
+    <string name="start_level">Level 1</string>
+    <string name="next_level">Next Level</string>
+    <!-- -
+        This is an ad unit ID for an interstitial test ad. Replace with your own interstitial ad unit id.
+        For more information, see https://support.google.com/admob/answer/3052638
+    <!- -->
+    <string name="interstitial_ad_unit_id">ca-app-pub-3940256099942544/1033173712</string>
 </resources>
