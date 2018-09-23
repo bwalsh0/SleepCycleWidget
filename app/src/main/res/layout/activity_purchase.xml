@@ -91,10 +91,11 @@
                             android:textSize="20sp" />
 
                         <TextView
+                            android:id="@+id/text"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:fontFamily="@font/open_sans_light"
-                            android:text="Unlocks widget themes and disables ads.\n\nEvery bit helps a college student. Even if you decide not to upgrade, I appreciate any feedback and support.\n\nThank you,\nBryan Walsh"
+                            android:text="Unlocks widget themes and disables ads.\n\nEvery little bit helps a struggling college student. Even if you decide not to upgrade, I appreciate any feedback and support.\n\nThank you,\nBryan Walsh"
                             android:textColor="@color/dark_text"
                             android:textSize="16sp" />
                     </LinearLayout>
@@ -120,7 +121,7 @@
                             android:textAppearance="@style/TextAppearance.AppCompat"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="16sp"
-                            android:visibility="gone"
+                            android:visibility="visible"
                             app:backgroundTint="@android:color/transparent"
                             app:layout_constraintEnd_toStartOf="@+id/add_button"
                             app:layout_constraintStart_toStartOf="parent"

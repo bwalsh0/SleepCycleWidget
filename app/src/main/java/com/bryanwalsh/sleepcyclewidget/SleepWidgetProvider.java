@@ -181,7 +181,6 @@ public class SleepWidgetProvider extends AppWidgetProvider {
                     for (int appWidgetId : appWidgetIds) {
                         updateAppWidget(context, appWidgetManager, appWidgetId);
                     }
-                Log.e("Pref. broadcast_rcv", "Updated, " + theme_id + ", (" + theme + ")");
         }
     }
 

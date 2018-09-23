@@ -12,3 +12,6 @@ app/src/main/java/com/bryanwalsh/sleepcyclewidget/PurchaseActivity.java
 app/src/main/java/com/bryanwalsh/sleepcyclewidget/util/Purchase.java
 app/release/app-release.apk
 app/release/app-release.apk
+app/src/main/java/com/bryanwalsh/sleepcyclewidget/billingMethods.java
+app/src/main/java/com/bryanwalsh/sleepcyclewidget/publicBillingHelper.java
+app/src/main/res/values/private_ids.xml

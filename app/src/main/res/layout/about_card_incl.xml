@@ -68,11 +68,13 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:gravity="center_vertical"
-
             android:orientation="horizontal"
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
@@ -82,20 +84,21 @@
                 android:layout_height="24dp"
                 android:tint="@color/colorPrimaryDark"
                 app:srcCompat="@drawable/ic_round_email_24px" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="32dp"
                 android:layout_marginStart="32dp"
+                android:layout_marginLeft="32dp"
                 android:orientation="vertical"
-                android:paddingBottom="8dp"
-                android:paddingTop="8dp">
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -111,7 +114,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="true"
-            android:focusable="auto"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="16dp"
@@ -147,13 +151,13 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/follow_on_twitter"
+            android:id="@+id/linkedin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:clickable="true"
+            android:focusable="true"
+            android:foreground="?android:attr/selectableItemBackground"
             android:gravity="center_vertical"
-
             android:orientation="horizontal"
             android:paddingLeft="16dp"
             android:paddingRight="16dp">
@@ -179,34 +183,6 @@
                 android:text="LinkedIn"
                 android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
             </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/visit_website"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:clickable="true"
-            android:gravity="center_vertical"
-
-            android:orientation="horizontal"
-            android:paddingLeft="16dp"
-            android:paddingRight="16dp"
-            android:visibility="gone">
-
-            <ImageView
-                android:layout_width="24dp"
-                android:layout_height="24dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="32dp"
-                android:layout_marginLeft="32dp"
-                android:paddingTop="8dp"
-                android:paddingBottom="8dp"
-                android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
-
         </LinearLayout>
 
     </LinearLayout>

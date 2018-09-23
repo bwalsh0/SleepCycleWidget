@@ -36,7 +36,6 @@ import static com.bryanwalsh.sleepcyclewidget.PurchaseActivity.billingRsa;
 public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
 
     static Boolean flag;
-    static IabHelper mHelper;
 
     private static Preference.OnPreferenceChangeListener sBindPreferenceSummaryToValueListener = new Preference.OnPreferenceChangeListener() {
         @Override
@@ -164,38 +163,14 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
             themeEnable.setEnabled(false);
             themeEnable.setSummary("Upgrade to unlock themes");
 
-            mHelper = new IabHelper(getContext(), billingRsa);
-
-            final IabHelper.QueryInventoryFinishedListener mReceivedInventoryListener = new IabHelper.QueryInventoryFinishedListener() {
-                public void onQueryInventoryFinished(IabResult result, Inventory inv) throws IabHelper.IabAsyncInProgressException {
-                    Log.e("queryInv", "Query inventory finished.");
-                    if (result.isFailure()) {
-                        Log.e("Failed to query inv", "" + result);
-                        return;
-                    }
-                    flag = inv.hasPurchase(ITEM_SKU);
-                    Log.e("flag is","" + flag);
-                    if (!flag) {
-                        getPreferenceScreen().findPreference("theme1").setSummary("Upgrade to unlock themes");
-                    }
-                    getPreferenceScreen().findPreference("theme1").setEnabled(flag);
+            flag = PublicBillingHelper.isPro();
+            Log.e("PrefScreen: IsPro()","" + flag);
+                if (flag) {
+                    getPreferenceScreen().findPreference("theme1").setEnabled(true);
+                    getPreferenceScreen().findPreference("buyIap").setEnabled(false);
+                    getPreferenceScreen().findPreference("buyIap").setTitle("Pro features enabled");
+                    getPreferenceScreen().findPreference("buyIap").setSummary("Themes unlocked & no ads");
                 }
-            };
-
-            mHelper.startSetup(new IabHelper.OnIabSetupFinishedListener() {
-                @Override
-                public void onIabSetupFinished(IabResult result) {
-                    if (!result.isSuccess()) {
-                        return;
-                    } else {
-                        try {
-                            mHelper.queryInventoryAsync(mReceivedInventoryListener);
-                        } catch (IabHelper.IabAsyncInProgressException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }
-            });
 
             bindPreferenceSummaryToValue(findPreference("tts"));
             bindPreferenceSummaryToValue(findPreference("cycle_amt"));
