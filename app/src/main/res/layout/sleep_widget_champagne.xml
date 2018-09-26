@@ -5,27 +5,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="8dp"
-    android:background="@android:drawable/editbox_background_normal"
+    android:background="@drawable/rounded_frame_bg"
     android:backgroundTint="#fffff7"
     android:padding="4dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:backgroundTint="@color/colorPrimary">
+        android:paddingRight="8dp">
 
         <ImageButton
             android:id="@+id/sleep"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
             android:layout_weight="3.2"
+            android:background="@drawable/rounded_frame_bg"
             android:backgroundTint="#fff5cf"
             android:contentDescription="Calculate Sleep Times Button"
             android:elevation="0dp"
+            android:padding="8dp"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_round_snooze_24px"
             android:tint="#212121" />

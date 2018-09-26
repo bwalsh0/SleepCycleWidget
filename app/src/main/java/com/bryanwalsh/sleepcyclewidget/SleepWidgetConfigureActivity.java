@@ -25,14 +25,10 @@ public class SleepWidgetConfigureActivity extends AppCompatActivity {
         public void onClick(View v) {
             final Context context = SleepWidgetConfigureActivity.this;
 
-            // When the button is clicked, store the string locally
             mAppWidgetText = findViewById(R.id.appwidget_text);
             String widgetText = mAppWidgetText.getText().toString();
             saveTitlePref(context, mAppWidgetId, widgetText);
 
-            // It is the responsibility of the configuration activity to update the app widget
-
-            // Make sure we pass back the original appWidgetId
             Intent resultValue = new Intent();
             resultValue.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, mAppWidgetId);
             setResult(RESULT_OK, resultValue);
@@ -59,8 +55,7 @@ public class SleepWidgetConfigureActivity extends AppCompatActivity {
         prefs.apply();
     }
 
-    // Read the prefix from the SharedPreferences object for this widget.
-    // If there is no preference saved, get the default from a resource
+    //Overload SharedPreferences
     static String loadTitlePref(Context context, int appWidgetId) {
         SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
         String titleValue = prefs.getString(PREF_PREFIX_KEY + appWidgetId, null);
@@ -97,6 +92,7 @@ public class SleepWidgetConfigureActivity extends AppCompatActivity {
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 
+        //AdView
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {
@@ -112,4 +108,3 @@ public class SleepWidgetConfigureActivity extends AppCompatActivity {
         mAppWidgetText.setText(loadTitlePref(SleepWidgetConfigureActivity.this, mAppWidgetId));
     }
 }
-

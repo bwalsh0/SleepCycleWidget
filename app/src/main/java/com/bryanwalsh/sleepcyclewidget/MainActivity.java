@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onAdFailedToLoad(int errorCode) {
-//                mAdView.setVisibility(View.GONE);
+                mAdView.setVisibility(View.GONE);
                 ad_text.setVisibility(View.VISIBLE);
             }
 

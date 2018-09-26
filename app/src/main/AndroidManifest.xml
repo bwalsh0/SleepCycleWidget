@@ -75,6 +75,12 @@
             android:parentActivityName=".WidgetConfigurePreferences"
             android:theme="@style/AppTheme">
         </activity>
+        <activity
+            android:name=".InformationActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme">
+        </activity>
+
 
         <!--BEGIN ADMOB-->
         <activity

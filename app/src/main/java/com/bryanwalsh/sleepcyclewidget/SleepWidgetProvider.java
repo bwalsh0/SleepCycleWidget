@@ -273,7 +273,7 @@ public class SleepWidgetProvider extends AppWidgetProvider {
         int[] nextHours;
         int[] nextMins;
 
-        calendar.add(Calendar.MINUTE, 90 + time_offset);
+        calendar.add(Calendar.MINUTE, 180 + time_offset);
         nextTime1 = ShortenString(AppendHour(calendar.get(Calendar.HOUR)) + ":" +
                 AppendMin(calendar.get(Calendar.MINUTE)) + GetMeridiem());                               //TODO: Find a way to incorporate ConvertTimes() for min < 10
 
