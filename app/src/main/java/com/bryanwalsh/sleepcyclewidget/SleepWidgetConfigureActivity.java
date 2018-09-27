@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
@@ -40,6 +41,13 @@ public class SleepWidgetConfigureActivity extends AppCompatActivity {
         public void onClick(View v) {
             Intent intent = new Intent(getApplicationContext(), WidgetConfigurePreferences.class);
             intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, WidgetConfigurePreferences.GeneralPreferenceFragment.class.getName());
+            startActivity(intent);
+        }
+    };
+
+    View.OnClickListener iOnClickListener = new View.OnClickListener() {
+        public void onClick(View v) {
+            Intent intent = new Intent(SleepWidgetConfigureActivity.this, InformationActivity.class);
             startActivity(intent);
         }
     };
@@ -81,6 +89,7 @@ public class SleepWidgetConfigureActivity extends AppCompatActivity {
         mAppWidgetText = findViewById(R.id.appwidget_text);
         findViewById(R.id.add_button).setOnClickListener(mOnClickListener);
         findViewById(R.id.settings_button).setOnClickListener(sOnClickListener);
+        findViewById(R.id.info_card2).setOnClickListener(iOnClickListener);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         TextView mTitle = toolbar.findViewById(R.id.toolbar_title);

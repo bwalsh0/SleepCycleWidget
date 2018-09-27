@@ -24,6 +24,7 @@
             android:layout_marginBottom="12dp"
             android:layout_weight="3.2"
             android:background="@drawable/rounded_frame_bg"
+            android:foreground="@drawable/rounded_ripple"
             android:backgroundTint="#e0e0e0"
             android:contentDescription="Calculate Sleep Times Button"
             android:elevation="0dp"

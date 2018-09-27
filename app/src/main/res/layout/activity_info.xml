@@ -1,8 +1,8 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -11,10 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:elevation="2dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:elevation="2dp">
 
         <TextView
             android:id="@+id/toolbar_title"
@@ -27,84 +24,108 @@
             android:textSize="20sp" />
     </android.support.v7.widget.Toolbar>
 
-    <LinearLayout
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:layout_marginTop="60dp">
 
-        <android.support.v7.widget.CardView
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:padding="16dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
-                        android:text="How much sleep should I get?"
-                        android:textAlignment="center"
-                        android:textColor="@color/dark_text"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/open_sans_light"
-                        android:text="It takes the average person 15 minutes to fall asleep, and everyone should aim for 4 to 5 cycles (6 to 9 hours) of sleep each night. You can configure your personal data in the widget settings."
-                        android:textAlignment="textStart"
-                        android:textColor="#555"
-                        android:textSize="14sp" />
-                </LinearLayout>
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="2dp">
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="16dp">
+                android:layout_weight="1"
+                android:orientation="vertical">
 
-                <TextView
+                <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:text="What does each time on the widget mean?"
-                    android:textAlignment="center"
-                    android:textColor="@color/dark_text"
-                    android:textSize="14sp" />
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
 
-                <TextView
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="160dp"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/widget_explain_small" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            android:padding="16dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:text="What does each time on the widget mean?"
+                                android:textAlignment="center"
+                                android:textColor="@color/dark_text"
+                                android:textSize="15sp" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/open_sans_light"
+                                android:text="Each time on the widget is the time that each sleep cycle ends. The first calculated time is the ending of your 2nd sleep cycle. You can configure which ones you would like to see in settings.When you choose the option to display 3 cycles on the widget, only the ending times for your 4th, 5th, and 6th sleep cycles are shown."
+                                android:textAlignment="textStart"
+                                android:textColor="#555"
+                                android:textSize="15sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
+                <android.support.v7.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans_light"
-                    android:text="Each time on the widget is the time that each sleep cycle ends. You can configure which ones you would like to see in settings.When you choose the option to display 3 cycles on the widget, only the ending times for your 3rd, 4th, and 5th sleep cycles are shown."
-                    android:textAlignment="textStart"
-                    android:textColor="#555"
-                    android:textSize="14sp" />
+                    android:layout_margin="8dp"
+                    app:cardCornerRadius="8dp"
+                    app:cardElevation="2dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="8dp"
+                            android:text="How much sleep should I get?"
+                            android:textAlignment="center"
+                            android:textColor="@color/dark_text"
+                            android:textSize="15sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/open_sans_light"
+                            android:text="It takes the average person 15 minutes to fall asleep, and everyone should aim for 4 to 5 cycles (6 to 9 hours) of sleep each night. You can configure your personal data in the widget settings."
+                            android:textAlignment="textStart"
+                            android:textColor="#555"
+                            android:textSize="15sp" />
+                    </LinearLayout>
+                </android.support.v7.widget.CardView>
+
             </LinearLayout>
-        </android.support.v7.widget.CardView>
 
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0"
+        android:layout_height="match_parent"
         android:gravity="bottom|center"
         android:orientation="vertical">
 
@@ -189,4 +210,4 @@
 
     </LinearLayout>
 
-</LinearLayout>
+</RelativeLayout>

@@ -163,9 +163,9 @@ public class SleepWidgetProvider extends AppWidgetProvider {
                 }
         }
 
-        else if (onClick2.equals(intent.getAction())) {
-            openTimePickerDialog(context);
-        }
+//        else if (onClick2.equals(intent.getAction())) {
+//            openTimePickerDialog(context);
+//        }
 
         else if (prefUpdate.equals(intent.getAction())) {
                 AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);

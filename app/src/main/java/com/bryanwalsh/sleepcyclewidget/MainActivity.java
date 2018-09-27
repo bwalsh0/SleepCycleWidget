@@ -30,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
         CardView settingsCard = findViewById(R.id.settings_card);
         CardView upgradeCard = findViewById(R.id.upgrade_card);
         CardView proCard = findViewById(R.id.pro_card);
+        CardView infoCard = findViewById(R.id.info_card);
         CardView adCard = findViewById(R.id.ad_card);
         TextView version = findViewById(R.id.versionInfo);
 
@@ -67,14 +68,21 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainActivity.this, WidgetConfigurePreferences.class);
                 intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, WidgetConfigurePreferences.GeneralPreferenceFragment.class.getName());
                 startActivity(intent);
-            }   //TODO: snackbar for returning to previous page (for saved settings)
+            }
         });
 
         upgradeCard.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, PurchaseActivity.class);
                 startActivity(intent);
-            }   //TODO: cancel button or change view after purchase (& remove future ad)
+            }
+        });
+
+        infoCard.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, InformationActivity.class);
+                startActivity(intent);
+            }
         });
 
         //If there are issues with older versions, uncomment below
