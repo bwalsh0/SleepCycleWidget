@@ -8,9 +8,6 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import java.util.Calendar;
-import java.util.Locale;
-
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.util.Log;
@@ -18,6 +15,9 @@ import android.view.View;
 import android.widget.RemoteViews;
 import android.widget.TimePicker;
 import android.widget.Toast;
+
+import java.util.Calendar;
+import java.util.Locale;
 
 public class SleepWidgetProvider extends AppWidgetProvider {
     private static final String onClick1 = "GET_TIME";

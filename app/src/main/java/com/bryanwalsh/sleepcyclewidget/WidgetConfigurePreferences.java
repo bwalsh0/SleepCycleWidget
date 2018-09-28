@@ -1,8 +1,6 @@
 package com.bryanwalsh.sleepcyclewidget;
 
 import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.PendingIntent;
 import android.appwidget.AppWidgetManager;
 import android.content.Context;
 import android.content.Intent;
@@ -14,24 +12,15 @@ import android.preference.CheckBoxPreference;
 import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.ActionBar;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.ActionBar;
 import android.text.Html;
 import android.util.Log;
 import android.view.MenuItem;
-import android.widget.Toast;
-
-import com.bryanwalsh.sleepcyclewidget.util.IabHelper;
-import com.bryanwalsh.sleepcyclewidget.util.IabResult;
-import com.bryanwalsh.sleepcyclewidget.util.Inventory;
-import com.bryanwalsh.sleepcyclewidget.util.Purchase;
 
 import java.util.List;
-
-import static com.bryanwalsh.sleepcyclewidget.PurchaseActivity.ITEM_SKU;
-import static com.bryanwalsh.sleepcyclewidget.PurchaseActivity.billingRsa;
 
 public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
 
@@ -81,21 +70,21 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
         super();
     }
 
-    static void saveTitlePref(Context context, int appWidgetId, String text) {
-        SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
-        prefs.putString(PREF_PREFIX_KEY + appWidgetId, text);
-        prefs.apply();
-    }
-
-    static String loadTitlePref(Context context, int appWidgetId) {
-        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
-        String titleValue = prefs.getString(PREF_PREFIX_KEY + appWidgetId, null);
-        if (titleValue != null) {
-            return titleValue;
-        } else {
-            return context.getString(R.string.appwidget_text);
-        }
-    }
+//    static void saveTitlePref(Context context, int appWidgetId, String text) {
+//        SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
+//        prefs.putString(PREF_PREFIX_KEY + appWidgetId, text);
+//        prefs.apply();
+//    }
+//
+//    static String loadTitlePref(Context context, int appWidgetId) {
+//        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
+//        String titleValue = prefs.getString(PREF_PREFIX_KEY + appWidgetId, null);
+//        if (titleValue != null) {
+//            return titleValue;
+//        } else {
+//            return context.getString(R.string.appwidget_text);
+//        }
+//    }
 
     static void deleteTitlePref(Context context, int appWidgetId) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
@@ -147,7 +136,7 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
     protected boolean isValidFragment(String fragmentName) {
         return PreferenceFragment.class.getName().equals(fragmentName)
                 || GeneralPreferenceFragment.class.getName().equals(fragmentName)
-                || DataSyncPreferenceFragment.class.getName().equals(fragmentName)
+//                || DataSyncPreferenceFragment.class.getName().equals(fragmentName)
                 || NotificationPreferenceFragment.class.getName().equals(fragmentName);
     }
 
@@ -247,38 +236,34 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
      * This fragment shows data and sync preferences only. It is used when the
      * activity is showing a two-pane settings UI.
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-    public static class DataSyncPreferenceFragment extends PreferenceFragment {
-        @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-            addPreferencesFromResource(R.xml.pref_data_sync);
-            setHasOptionsMenu(true);
-
-            // Bind the summaries of EditText/List/Dialog/Ringtone preferences
-            // to their values. When their values change, their summaries are
-            // updated to reflect the new value, per the Android Design
-            // guidelines.
-            bindPreferenceSummaryToValue(findPreference("sync_frequency"));
-        }
-
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
-            if (id == android.R.id.home) {
-                startActivity(new Intent(getActivity(), WidgetConfigurePreferences.class));
-                return true;
-            }
-            return super.onOptionsItemSelected(item);
-        }
-    }
+//    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+//    public static class DataSyncPreferenceFragment extends PreferenceFragment {
+//        @Override
+//        public void onCreate(Bundle savedInstanceState) {
+//            super.onCreate(savedInstanceState);
+//            addPreferencesFromResource(R.xml.pref_data_sync);
+//            setHasOptionsMenu(true);
+//
+//            bindPreferenceSummaryToValue(findPreference("sync_frequency"));
+//        }
+//
+//        @Override
+//        public boolean onOptionsItemSelected(MenuItem item) {
+//            int id = item.getItemId();
+//            if (id == android.R.id.home) {
+//                startActivity(new Intent(getActivity(), WidgetConfigurePreferences.class));
+//                return true;
+//            }
+//            return super.onOptionsItemSelected(item);
+//        }
+//    }
 
     SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
             Intent intent = new Intent();
             intent.setAction(AppWidgetManager.ACTION_APPWIDGET_UPDATE);
             sendBroadcast(intent);
-            if (key.matches("theme1")) {
+            if (key.matches("theme1") && PublicBillingHelper.isPro()) {
                 Snackbar.make(getListView(), Html.fromHtml("<font color=\"#FFAAB6FE\">Theme applied</font>"), Snackbar.LENGTH_SHORT).show();
             }
         }
