@@ -176,7 +176,8 @@
                     android:layout_centerHorizontal="true"
                     android:layout_gravity="center"
                     ads:adSize="BANNER"
-                    ads:adUnitId="@string/test_adID"></com.google.android.gms.ads.AdView>
+                    ads:adUnitId="@string/adID">
+                </com.google.android.gms.ads.AdView>
 
                 <TextView
                     android:id="@+id/ad_textview"

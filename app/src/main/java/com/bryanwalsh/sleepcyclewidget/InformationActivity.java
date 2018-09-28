@@ -35,8 +35,8 @@ public class InformationActivity extends AppCompatActivity {
 
             AdView adView = new AdView(this);
             adView.setAdSize(AdSize.BANNER);
-//        adView.setAdUnitId(getResources().getString(R.string.adID));
-            adView.setAdUnitId(getResources().getString(R.string.test_adID));
+            adView.setAdUnitId(getResources().getString(R.string.adID));
+//            adView.setAdUnitId(getResources().getString(R.string.test_adID));
 
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);

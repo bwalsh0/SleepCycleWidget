@@ -29,11 +29,10 @@
         android:title="Personal Settings">
 
         <EditTextPreference
+            android:key="tts"
             android:defaultValue="15"
             android:dialogTitle="Enter time in minutes (ex. 15)"
             android:inputType="number"
-            android:key="tts"
-            android:numeric="integer"
             android:summary="15"
             android:title="Average time it takes you to fall asleep" />
     </PreferenceCategory>

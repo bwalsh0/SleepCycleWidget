@@ -19,8 +19,6 @@ import android.widget.RemoteViews;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
-//ToDo: Change app name to SleepCycleWidget
-
 public class SleepWidgetProvider extends AppWidgetProvider {
     private static final String onClick1 = "GET_TIME";
     private static final String onClick2 = "ADD_ALARM";
@@ -44,7 +42,7 @@ public class SleepWidgetProvider extends AppWidgetProvider {
     String nextTime1, nextTime2, nextTime3, nextTime4, nextTime5;
 
     //User Preference Modifiers
-    int time_offset;
+    int time_offset = 15;
     int cycle_num;
     boolean curr_flag;
     boolean toast_flag;
@@ -57,7 +55,7 @@ public class SleepWidgetProvider extends AppWidgetProvider {
         try {
             theme_id = Integer.parseInt(getDefaults("theme1", context));
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            theme_id = 0;
         }
         int theme = R.layout.sleep_widget_light_rounded;
         switch(theme_id) {
@@ -111,7 +109,7 @@ public class SleepWidgetProvider extends AppWidgetProvider {
         try {
             theme_id = Integer.parseInt(getDefaults("theme1", context));
         } catch (NumberFormatException e) {
-            e.printStackTrace();
+            theme_id = 0;
         }
         int theme = R.layout.sleep_widget_light_rounded;
         switch(theme_id) {
@@ -142,10 +140,20 @@ public class SleepWidgetProvider extends AppWidgetProvider {
         timeContext = context; //links context and intent updates to UpdateTime()
 
         //User Preferences
-        time_offset = Integer.parseInt(getDefaults("tts", context));
+        try {
+            time_offset = Integer.parseInt(getDefaults("tts", context));
+        }
+        catch (NumberFormatException e) {
+            time_offset = 15;
+        }
         toast_flag = getDefaultBool("toast_flag", context);
         curr_flag = getDefaultBool("curr_flag", context);
-        cycle_num = Integer.parseInt(getDefaults("cycle_amt", context)) + 3; //Partly hardcoded, fine now but fix later //Use an overloaded get() method
+        try {
+            cycle_num = Integer.parseInt(getDefaults("cycle_amt", context)) + 3; //Partly hardcoded, fine now but fix later //Use an overloaded get() method;
+        }
+        catch (NumberFormatException e) {
+            cycle_num = 5;
+        }
 
         if (onClick1.equals(intent.getAction())) {
                 if (time_offset >= 90) { //double check if user accidentally set offset too high
@@ -176,7 +184,7 @@ public class SleepWidgetProvider extends AppWidgetProvider {
                 remoteViews.setViewVisibility(R.id.default_ll, View.VISIBLE);
                 remoteViews.setViewVisibility(R.id.nextTimes_ll, View.GONE);
                 remoteViews.setViewVisibility(R.id.currTime, View.GONE);
-                //Restart widget instance
+                //Restart widget instance to apply theme
                 appWidgetManager.updateAppWidget(appWidgetIds, remoteViews); //Usage:
                     for (int appWidgetId : appWidgetIds) {
                         updateAppWidget(context, appWidgetManager, appWidgetId);
@@ -192,11 +200,14 @@ public class SleepWidgetProvider extends AppWidgetProvider {
             RemoteViews remoteViews = new RemoteViews(AppWidget.getPackageName(), theme);
             remoteViews.setTextViewText(R.id.currTime, time12);
 
+            remoteViews.setViewVisibility(R.id.default_ll, View.GONE);
+
             if (!curr_flag) {
                 remoteViews.setViewVisibility(R.id.currTime, View.VISIBLE);
             }
-            remoteViews.setViewVisibility(R.id.default_ll, View.GONE);
             remoteViews.setViewVisibility(R.id.nextTimes_ll, View.VISIBLE);
+
+            Log.e("Cycles", "" + cycle_num);
 
             //TODO: I should probably optimize these
             if (cycle_num == 5) {
@@ -295,7 +306,6 @@ public class SleepWidgetProvider extends AppWidgetProvider {
         Log.e("NextTimes:", nextTime1 + ", " + nextTime2 + ", " + nextTime3 + ", " + nextTime4 + ", " + nextTime5);
 
         //ShortenString();
-        //TODO: Append Cycle #'s to each time
     }
 
     public String ShortenString(String nextTime) {
