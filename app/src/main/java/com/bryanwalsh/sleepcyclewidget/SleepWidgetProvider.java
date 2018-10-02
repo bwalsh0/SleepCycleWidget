@@ -31,7 +31,7 @@ public class SleepWidgetProvider extends AppWidgetProvider {
 
     //java.util.Calendar
     int mHour = calendar.get(Calendar.HOUR);
-    int mHour24 = calendar.get(Calendar.HOUR_OF_DAY);
+    //int mHour24 = calendar.get(Calendar.HOUR_OF_DAY);
     int mMin = calendar.get(Calendar.MINUTE);
 
     //Times to be converted into readable w/ ConvertTime() method
@@ -51,35 +51,36 @@ public class SleepWidgetProvider extends AppWidgetProvider {
     final static int ABR = 1;
 
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager, int appWidgetId) {
-        int theme_id = 0;
-        try {
-            theme_id = Integer.parseInt(getDefaults("theme1", context));
-        } catch (NumberFormatException e) {
-            theme_id = 0;
-        }
-        int theme = R.layout.sleep_widget_light_rounded;
-        switch(theme_id) {
-            case 0:
-                theme = R.layout.sleep_widget_light_rounded;
-                break;
-            case 1:
-                theme = R.layout.sleep_widget_dark_rounded;
-                break;
-            case 2:
-                theme = R.layout.sleep_widget_pearl;
-                break;
-            case 3:
-                theme = R.layout.sleep_widget_champagne;
-                break;
-            case 4:
-                theme = R.layout.sleep_widget_light;
-                break;
-            case 5:
-                theme = R.layout.sleep_widget_dark;
-                break;
-            default:
-                theme = R.layout.sleep_widget_light_rounded;
-        }
+//        int theme_id = 0;
+//        try {
+//            theme_id = Integer.parseInt(getDefaults("theme1", context));
+//        } catch (NumberFormatException e) {
+//            theme_id = 0;
+//        }
+//        int theme = R.layout.sleep_widget_light_rounded;
+//        switch(theme_id) {
+//            case 0:
+//                theme = R.layout.sleep_widget_light_rounded;
+//                break;
+//            case 1:
+//                theme = R.layout.sleep_widget_dark_rounded;
+//                break;
+//            case 2:
+//                theme = R.layout.sleep_widget_pearl;
+//                break;
+//            case 3:
+//                theme = R.layout.sleep_widget_champagne;
+//                break;
+//            case 4:
+//                theme = R.layout.sleep_widget_light;
+//                break;
+//            case 5:
+//                theme = R.layout.sleep_widget_dark;
+//                break;
+//            default:
+//                theme = R.layout.sleep_widget_light_rounded;
+//        }
+        int theme = getTheme(context);
         RemoteViews views = new RemoteViews(context.getPackageName(), theme);
         int[] idArray = new int[]{appWidgetId};
 
@@ -105,36 +106,9 @@ public class SleepWidgetProvider extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        int theme_id = 0;
-        try {
-            theme_id = Integer.parseInt(getDefaults("theme1", context));
-        } catch (NumberFormatException e) {
-            theme_id = 0;
-        }
-        int theme = R.layout.sleep_widget_light_rounded;
-        switch(theme_id) {
-            case 0:
-                theme = R.layout.sleep_widget_light_rounded;
-                break;
-            case 1:
-                theme = R.layout.sleep_widget_dark_rounded;
-                break;
-            case 2:
-                theme = R.layout.sleep_widget_pearl;
-                break;
-            case 3:
-                theme = R.layout.sleep_widget_champagne;
-                break;
-            case 4:
-                theme = R.layout.sleep_widget_light;
-                break;
-            case 5:
-                theme = R.layout.sleep_widget_dark;
-                break;
-            default:
-                theme = R.layout.sleep_widget_light_rounded;
-        }
+        int theme = getTheme(context);
         super.onReceive(context, intent);
+        buttonPending(context, theme);
 
         timeIntent = intent;
         timeContext = context; //links context and intent updates to UpdateTime()
@@ -170,7 +144,7 @@ public class SleepWidgetProvider extends AppWidgetProvider {
                     //ToDo: Add option for 12h or 24h time style (after v1.0 release)
                 }
         }
-
+        //Disabled alarm picker until ready to implement
 //        else if (onClick2.equals(intent.getAction())) {
 //            openTimePickerDialog(context);
 //        }
@@ -207,29 +181,28 @@ public class SleepWidgetProvider extends AppWidgetProvider {
             }
             remoteViews.setViewVisibility(R.id.nextTimes_ll, View.VISIBLE);
 
-            Log.e("Cycles", "" + cycle_num);
+            remoteViews.setTextViewText(R.id.nT1, nextTime1);
+            remoteViews.setTextViewText(R.id.nT2, nextTime2);
+            remoteViews.setTextViewText(R.id.nT3, nextTime3);
+            remoteViews.setTextViewText(R.id.nT4, nextTime4);
+            remoteViews.setTextViewText(R.id.nT5, nextTime5);
 
-            //TODO: I should probably optimize these
-            if (cycle_num == 5) {
-                remoteViews.setTextViewText(R.id.nT1, nextTime1);
-                remoteViews.setTextViewText(R.id.nT2, nextTime2);
-                remoteViews.setTextViewText(R.id.nT3, nextTime3);
-                remoteViews.setTextViewText(R.id.nT4, nextTime4);
-                remoteViews.setTextViewText(R.id.nT5, nextTime5);
-            }
-            if (cycle_num == 4) {
-                remoteViews.setViewVisibility(R.id.nT1, View.GONE);
-                remoteViews.setTextViewText(R.id.nT2, nextTime2);
-                remoteViews.setTextViewText(R.id.nT3, nextTime3);
-                remoteViews.setTextViewText(R.id.nT4, nextTime4);
-                remoteViews.setTextViewText(R.id.nT5, nextTime5);
-            }
-            if (cycle_num == 3) {
-                remoteViews.setViewVisibility(R.id.nT1, View.GONE);
-                remoteViews.setViewVisibility(R.id.nT2, View.GONE);
-                remoteViews.setTextViewText(R.id.nT3, nextTime3);
-                remoteViews.setTextViewText(R.id.nT4, nextTime4);
-                remoteViews.setTextViewText(R.id.nT5, nextTime5);
+            switch(cycle_num) {
+                case 5:
+                    remoteViews.setViewVisibility(R.id.nT1, View.VISIBLE);
+                    remoteViews.setViewVisibility(R.id.nT2, View.VISIBLE);
+                    break;
+                case 4:
+                    remoteViews.setViewVisibility(R.id.nT1, View.GONE);
+                    remoteViews.setViewVisibility(R.id.nT2, View.VISIBLE);
+                    break;
+                case 3:
+                    remoteViews.setViewVisibility(R.id.nT1, View.GONE);
+                    remoteViews.setViewVisibility(R.id.nT2, View.GONE);
+                    break;
+                default:
+                    remoteViews.setViewVisibility(R.id.nT1, View.VISIBLE);
+                    remoteViews.setViewVisibility(R.id.nT2, View.VISIBLE);
             }
 
             appWidgetManager.updateAppWidget(appWidgetIds, remoteViews);
@@ -237,25 +210,19 @@ public class SleepWidgetProvider extends AppWidgetProvider {
 
     public void ConvertTime() {
 
-        //minutes '9' to "09"
-        if (mMin < 10) {
-            min = "0" + Integer.toString(mMin);
-        }
-            else {
-            min = Integer.toString(mMin);
-        }
+        min = AppendMin(mMin);
+        hour = AppendHour(mHour);
 
-        hour = Integer.toString(mHour);
-
-        time24 = mHour24 + ":" + min;
-        time12 = mHour + ":" + min + GetMeridiem();
+        //time24 = mHour24 + ":" + min;
+        time12 = hour + ":" + min + GetMeridiem();
 
         NextTimes();
     }
 
     public String AppendMin(int integer) {
-        if (integer < 10)
+        if (integer < 10) {
             return "0" + Integer.toString(integer);
+        }
                 else {
             return Integer.toString(integer);
         }
@@ -279,10 +246,6 @@ public class SleepWidgetProvider extends AppWidgetProvider {
     }
 
     public void NextTimes(){
-        //cycle length = 90m + time_offset (time til sleep)
-
-        int[] nextHours;
-        int[] nextMins;
 
         calendar.add(Calendar.MINUTE, 180 + time_offset);
         nextTime1 = ShortenString(AppendHour(calendar.get(Calendar.HOUR)) + ":" +
@@ -304,8 +267,6 @@ public class SleepWidgetProvider extends AppWidgetProvider {
         nextTime5 = ShortenString(AppendHour(calendar.get(Calendar.HOUR)) + ":" +
                 AppendMin(calendar.get(Calendar.MINUTE)) + GetMeridiem());
         Log.e("NextTimes:", nextTime1 + ", " + nextTime2 + ", " + nextTime3 + ", " + nextTime4 + ", " + nextTime5);
-
-        //ShortenString();
     }
 
     public String ShortenString(String nextTime) {
@@ -321,7 +282,6 @@ public class SleepWidgetProvider extends AppWidgetProvider {
                 temp = temp + singleWord;
             }
         }
-
         if (temp.length() > 0) {
             result.append(temp);
         }
@@ -367,6 +327,7 @@ public class SleepWidgetProvider extends AppWidgetProvider {
                 pendingIntent);
     }
 
+    //Internal helper functions
     public static String getDefaults(String key, Context context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getString(key, null);
@@ -376,5 +337,50 @@ public class SleepWidgetProvider extends AppWidgetProvider {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         return preferences.getBoolean(key, false);
     }
-}
 
+    public static PendingIntent buttonPendingIntent(Context context) {
+        Intent intent = new Intent();
+        intent.setAction("GET_TIME");
+        Log.e("buttonPendingIntent", "Run2");
+        return PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+    }
+
+    private void buttonPending(Context context, int theme_id) {
+        RemoteViews views = new RemoteViews(context.getPackageName(), theme_id);
+        views.setOnClickPendingIntent(R.id.sleep, SleepWidgetProvider.buttonPendingIntent(context));
+        Log.e("buttonPendingCall", "Run1");
+    }
+
+    public static int getTheme(Context context) {
+        int theme_id = 0;
+        try {
+            theme_id = Integer.parseInt(getDefaults("theme1", context));
+        } catch (NumberFormatException e) {
+            theme_id = 0;
+        }
+        int theme = R.layout.sleep_widget_light_rounded;
+        switch(theme_id) {
+            case 0:
+                theme = R.layout.sleep_widget_light_rounded;
+                break;
+            case 1:
+                theme = R.layout.sleep_widget_dark_rounded;
+                break;
+            case 2:
+                theme = R.layout.sleep_widget_pearl;
+                break;
+            case 3:
+                theme = R.layout.sleep_widget_champagne;
+                break;
+            case 4:
+                theme = R.layout.sleep_widget_light;
+                break;
+            case 5:
+                theme = R.layout.sleep_widget_dark;
+                break;
+            default:
+                theme = R.layout.sleep_widget_light_rounded;
+        }
+        return theme;
+    }
+}

@@ -153,7 +153,6 @@
         android:foreground="?android:attr/selectableItemBackground"
         app:cardCornerRadius="8dp"
         app:cardElevation="2dp"
-        tools:layout_editor_absoluteX="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -188,7 +187,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/open_sans"
         android:padding="4dp"
@@ -199,6 +198,85 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/info_card2" />
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/ad_card2"
+        style="@style/Widget.MaterialComponents.CardView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:clickable="true"
+        android:clipChildren="false"
+        android:focusable="true"
+        android:foreground="?android:attr/selectableItemBackground"
+        app:cardBackgroundColor="@color/background"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/versionInfo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingStart="16dp"
+            android:paddingLeft="16dp"
+            android:paddingTop="8dp"
+            android:paddingEnd="16dp"
+            android:paddingRight="16dp"
+            android:paddingBottom="16dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:fontFamily="@font/open_sans_light"
+                android:text="Sponsored:"
+                android:textAlignment="center"
+                android:textColor="#555"
+                android:textSize="12sp" />
+
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="false"
+                android:layout_centerHorizontal="false"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/adUnitID"></com.google.android.gms.ads.AdView>
+
+            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView_test"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="false"
+                android:layout_centerHorizontal="false"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/adUnitID_test"></com.google.android.gms.ads.AdView>
+
+            <TextView
+                android:id="@+id/ad_textview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:drawablePadding="8dp"
+                android:drawableTint="@color/colorPrimaryDark"
+                android:fontFamily="@font/open_sans"
+                android:text="(adView): Failed to load"
+                android:textAlignment="center"
+                android:textAppearance="@style/TextAppearance.AppCompat"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="18sp"
+                android:visibility="gone"
+                app:backgroundTint="@android:color/transparent" />
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
 
     <TextView
         android:id="@+id/versionInfo"

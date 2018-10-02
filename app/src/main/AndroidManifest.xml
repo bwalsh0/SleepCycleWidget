@@ -8,8 +8,6 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-    <!-- TODO: App indexing -->
-
     <application
         android:name=".PublicBillingHelper"
         android:allowBackup="true"
@@ -96,7 +94,7 @@
 
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="@string/adID"/>
+            android:value="@string/adUnitID"/>
     </application>
 
 </manifest>

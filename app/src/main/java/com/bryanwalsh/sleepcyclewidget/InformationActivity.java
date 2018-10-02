@@ -24,26 +24,36 @@ public class InformationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_info);
 
-        mAdView = findViewById(R.id.adView);
         CardView adCard = findViewById(R.id.ad_card);
 
         adCard.setVisibility(View.GONE);
 
         if (!PublicBillingHelper.isPro()) {
             adCard.setVisibility(View.VISIBLE);
+            //ACC ID
             MobileAds.initialize(this, getResources().getString(R.string.adID));
 
             AdView adView = new AdView(this);
             adView.setAdSize(AdSize.BANNER);
-            adView.setAdUnitId(getResources().getString(R.string.adID));
-//            adView.setAdUnitId(getResources().getString(R.string.test_adID));
+            //UNIT ID
+            if (BuildConfig.DEBUG) {
+                mAdView = findViewById(R.id.adView_test);
+                mAdView.setVisibility(View.VISIBLE);
+                adView.setAdUnitId(getResources().getString(R.string.adUnitID_test));
+                Log.e("Debug", "is debug & " + BuildConfig.DEBUG);
+            } else {
+                mAdView = findViewById(R.id.adView);
+                mAdView.setVisibility(View.VISIBLE);
+                adView.setAdUnitId(getResources().getString(R.string.adUnitID));
+                Log.e("Debug", "is not debug & " + BuildConfig.DEBUG);
+            }
 
             AdRequest adRequest = new AdRequest.Builder().build();
             mAdView.loadAd(adRequest);
 
             ad_text = findViewById(R.id.ad_textview);
         }
-        Log.e("isPro()", "" + PublicBillingHelper.isPro());
+        Log.e("InfoActivity: isPro()", "" + PublicBillingHelper.isPro());
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         TextView mTitle = toolbar.findViewById(R.id.toolbar_title);

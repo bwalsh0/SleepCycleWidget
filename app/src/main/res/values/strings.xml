@@ -10,8 +10,8 @@
     <string name="pref_disclaimer"></string>
     <string name="howto">To add a widget, press and hold a space on your home screen and tap
         \"Widgets\".</string>
-    <string name="version">Bryan Walsh (v1.0.1)</string>
-    <string name="versionShort">1.0.1</string>
+    <string name="version">Bryan Walsh (v1.0.4)</string>
+    <string name="versionShort">1.0.4</string>
 
     <string name="disclaimer">It takes the average person 15 minutes to enter a sleep cycle.
         By default, this amount is added in the calculation. Configure your personal

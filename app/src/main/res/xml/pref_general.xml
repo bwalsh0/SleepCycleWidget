@@ -93,19 +93,5 @@
             android:singleLine="true"
             android:summary="Unlocks themes and disables ads"
             android:title="Get Pro Features" />
-        <Preference
-            android:dialogTitle=""
-            android:selectable="true"
-            android:singleLine="true"
-            android:summary="@string/version"
-            android:title="" />
     </PreferenceCategory>
-
-    <!-- NOTE: EditTextPreference accepts EditText attributes. -->
-    <!-- NOTE: EditTextPreference's summary should be set to its value by the activity code. -->
-
-    <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
-         dismiss it. -->
-    <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
-
 </PreferenceScreen>

@@ -7,12 +7,19 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.MobileAds;
 
 public class SleepWidgetConfigureActivity extends AppCompatActivity {
 
@@ -20,7 +27,9 @@ public class SleepWidgetConfigureActivity extends AppCompatActivity {
     private static final String PREF_PREFIX_KEY = "appwidget_";
     int mAppWidgetId = AppWidgetManager.INVALID_APPWIDGET_ID;
     EditText mAppWidgetText;
+    private AdView mAdView;
 
+    //Create Widget
     View.OnClickListener mOnClickListener = new View.OnClickListener() {
         public void onClick(View v) {
             final Context context = SleepWidgetConfigureActivity.this;
@@ -36,14 +45,17 @@ public class SleepWidgetConfigureActivity extends AppCompatActivity {
         }
     };
 
+    //To Settings Activity
     View.OnClickListener sOnClickListener = new View.OnClickListener() {
         public void onClick(View v) {
             Intent intent = new Intent(getApplicationContext(), WidgetConfigurePreferences.class);
             intent.putExtra(PreferenceActivity.EXTRA_SHOW_FRAGMENT, WidgetConfigurePreferences.GeneralPreferenceFragment.class.getName());
+            intent.putExtra(PreferenceActivity.EXTRA_NO_HEADERS, WidgetConfigurePreferences.GeneralPreferenceFragment.class.getName());
             startActivity(intent);
         }
     };
 
+    //To Info Activity
     View.OnClickListener iOnClickListener = new View.OnClickListener() {
         public void onClick(View v) {
             Intent intent = new Intent(SleepWidgetConfigureActivity.this, InformationActivity.class);
@@ -89,6 +101,7 @@ public class SleepWidgetConfigureActivity extends AppCompatActivity {
         findViewById(R.id.add_button).setOnClickListener(mOnClickListener);
         findViewById(R.id.settings_button).setOnClickListener(sOnClickListener);
         findViewById(R.id.info_card2).setOnClickListener(iOnClickListener);
+        CardView adCard = findViewById(R.id.ad_card2);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         TextView mTitle = toolbar.findViewById(R.id.toolbar_title);
@@ -101,6 +114,33 @@ public class SleepWidgetConfigureActivity extends AppCompatActivity {
         window.setStatusBarColor(getResources().getColor(R.color.colorPrimary));
 
         //AdView
+        adCard.setVisibility(View.GONE);
+
+        if (!PublicBillingHelper.isPro()) {
+            adCard.setVisibility(View.VISIBLE);
+            //ACC ID
+            MobileAds.initialize(this, getResources().getString(R.string.adID));
+            AdView adView = new AdView(this);
+            adView.setAdSize(AdSize.BANNER);
+            //UNIT ID
+            if (BuildConfig.DEBUG) {
+                mAdView = findViewById(R.id.adView_test);
+                mAdView.setVisibility(View.VISIBLE);
+                adView.setAdUnitId(getResources().getString(R.string.adUnitID_test));
+                Log.e("Debug", "is debug & " + BuildConfig.DEBUG);
+            } else {
+                mAdView = findViewById(R.id.adView);
+                mAdView.setVisibility(View.VISIBLE);
+                adView.setAdUnitId(getResources().getString(R.string.adUnitID));
+                Log.e("Debug", "is not debug & " + BuildConfig.DEBUG);
+            }
+
+            AdRequest adRequest = new AdRequest.Builder().build();
+            mAdView.loadAd(adRequest);
+        }
+        Log.e("ConfigActivity: isPro()", "" + PublicBillingHelper.isPro());
+
+
         Intent intent = getIntent();
         Bundle extras = intent.getExtras();
         if (extras != null) {

@@ -14,6 +14,7 @@ import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
+import android.preference.PreferenceScreen;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
 import android.text.Html;
@@ -69,22 +70,6 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
     public WidgetConfigurePreferences() {
         super();
     }
-
-//    static void saveTitlePref(Context context, int appWidgetId, String text) {
-//        SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
-//        prefs.putString(PREF_PREFIX_KEY + appWidgetId, text);
-//        prefs.apply();
-//    }
-//
-//    static String loadTitlePref(Context context, int appWidgetId) {
-//        SharedPreferences prefs = context.getSharedPreferences(PREFS_NAME, 0);
-//        String titleValue = prefs.getString(PREF_PREFIX_KEY + appWidgetId, null);
-//        if (titleValue != null) {
-//            return titleValue;
-//        } else {
-//            return context.getString(R.string.appwidget_text);
-//        }
-//    }
 
     static void deleteTitlePref(Context context, int appWidgetId) {
         SharedPreferences.Editor prefs = context.getSharedPreferences(PREFS_NAME, 0).edit();
@@ -196,6 +181,7 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
             int id = item.getItemId();
             if (id == android.R.id.home) {
                 startActivity(new Intent(getActivity(), WidgetConfigurePreferences.class));
+                //Snackbar.make(getActivity().findViewById(android.R.id.content), Html.fromHtml("<font color=\"#FFAAB6FE\">Settings applied</font>"), Snackbar.LENGTH_SHORT).show();
                 return true;
             }
             return super.onOptionsItemSelected(item);
@@ -232,32 +218,6 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
         }
     }
 
-    /**
-     * This fragment shows data and sync preferences only. It is used when the
-     * activity is showing a two-pane settings UI.
-     */
-//    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
-//    public static class DataSyncPreferenceFragment extends PreferenceFragment {
-//        @Override
-//        public void onCreate(Bundle savedInstanceState) {
-//            super.onCreate(savedInstanceState);
-//            addPreferencesFromResource(R.xml.pref_data_sync);
-//            setHasOptionsMenu(true);
-//
-//            bindPreferenceSummaryToValue(findPreference("sync_frequency"));
-//        }
-//
-//        @Override
-//        public boolean onOptionsItemSelected(MenuItem item) {
-//            int id = item.getItemId();
-//            if (id == android.R.id.home) {
-//                startActivity(new Intent(getActivity(), WidgetConfigurePreferences.class));
-//                return true;
-//            }
-//            return super.onOptionsItemSelected(item);
-//        }
-//    }
-
     SharedPreferences.OnSharedPreferenceChangeListener listener = new SharedPreferences.OnSharedPreferenceChangeListener() {
         public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
             Intent intent = new Intent();
@@ -265,6 +225,9 @@ public class WidgetConfigurePreferences extends AppCompatPreferenceActivity {
             sendBroadcast(intent);
             if (key.matches("theme1") && PublicBillingHelper.isPro()) {
                 Snackbar.make(getListView(), Html.fromHtml("<font color=\"#FFAAB6FE\">Theme applied</font>"), Snackbar.LENGTH_SHORT).show();
+            }
+            if (key.matches("tts") || key.matches("cycle_amt") || key.matches("toast_flag") || key.matches("curr_flag")) {
+                Snackbar.make(getListView(), Html.fromHtml("<font color=\"#FFAAB6FE\">Setting applied</font>"), Snackbar.LENGTH_SHORT).show();
             }
         }
     };

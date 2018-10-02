@@ -11,7 +11,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class AboutActivity extends AppCompatActivity {
-
     private int debugVal;
 
     @Override
@@ -33,50 +32,31 @@ public class AboutActivity extends AppCompatActivity {
         LinearLayout reportbug = findViewById(R.id.bugReport);
 
         github.setOnClickListener(v -> {
-                Intent intent = new Intent(Intent.ACTION_VIEW,
-                        Uri.parse("https://github.com/bwalsh0"));
-                startActivity(intent);
+            urlIntent("https://github.com/bwalsh0");
         });
 
         linkedin.setOnClickListener(v -> {
-            Intent intent = new Intent(Intent.ACTION_VIEW,
-                    Uri.parse("https://www.linkedin.com/in/walshbryanj/"));
-            startActivity(intent);
+            urlIntent("https://www.linkedin.com/in/walshbryanj");
         });
 
         reportbug.setOnClickListener(v -> {
-            Intent i = new Intent(Intent.ACTION_SEND);
-            i.setType("text/plain");
-            i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"bryanwalsh00@gmail.com"});
-            i.putExtra(Intent.EXTRA_SUBJECT, "Sleep Cycle Widget [Bug Report]");
-            i.putExtra(Intent.EXTRA_TEXT   , "Please include as much detail as possible about the issue.");
-            try {
-                startActivity(Intent.createChooser(i, "Send email using:"));
-            } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(AboutActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-            }
+            emailIntent("Sleep Cycle Widget [Bug Report]",
+                    "Please include as much detail as possible about the issue.");
         });
 
         email.setOnClickListener(v -> {
-            Intent i = new Intent(Intent.ACTION_SEND);
-            i.setType("text/plain");
-            i.putExtra(Intent.EXTRA_EMAIL  , new String[]{"bryanwalsh00@gmail.com"});
-            i.putExtra(Intent.EXTRA_SUBJECT, "Sleep Cycle Widget");
-            try {
-                startActivity(Intent.createChooser(i, "Send email using:"));
-            } catch (android.content.ActivityNotFoundException ex) {
-                Toast.makeText(AboutActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
-            }
+            emailIntent("Sleep Cycle Widget [Misc.]",
+                    "");
         });
 
         rate.setOnClickListener(v -> {
             Uri uri = Uri.parse("market://details?id=" + getPackageName());
-            Intent goToMarket = new Intent(Intent.ACTION_VIEW, uri);
-            goToMarket.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY |
                     Intent.FLAG_ACTIVITY_NEW_DOCUMENT |
                     Intent.FLAG_ACTIVITY_MULTIPLE_TASK);
             try {
-                startActivity(goToMarket);
+                startActivity(intent);
             } catch (ActivityNotFoundException e) {
                 startActivity(new Intent(Intent.ACTION_VIEW,
                         Uri.parse("http://play.google.com/store/apps/details?id=" + getPackageName())));
@@ -91,5 +71,22 @@ public class AboutActivity extends AppCompatActivity {
                 finish();
             }
         });
+    }
+
+    public void emailIntent(String subject, String body) {
+        Intent intent = new Intent(Intent.ACTION_SENDTO);
+        intent.setData(Uri.parse("mailto:bryanwalsh00@gmail.com"));
+        intent.putExtra(Intent.EXTRA_SUBJECT, subject);
+        intent.putExtra(Intent.EXTRA_TEXT   , body);
+        try {
+            startActivity(Intent.createChooser(intent, "Send email using:"));
+        } catch (android.content.ActivityNotFoundException ex) {
+            Toast.makeText(AboutActivity.this, "There are no email clients installed.", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void urlIntent(String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(intent);
     }
 }

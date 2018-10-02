@@ -260,7 +260,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="64dp"
             android:layout_marginEnd="8dp"
             android:layout_marginRight="8dp"
             android:clickable="true"
@@ -299,9 +299,20 @@
                     android:layout_alignParentBottom="false"
                     android:layout_centerHorizontal="false"
                     android:layout_gravity="center"
+                    android:visibility="gone"
                     ads:adSize="BANNER"
-                    ads:adUnitId="@string/adID">
-                </com.google.android.gms.ads.AdView>
+                    ads:adUnitId="@string/adUnitID"></com.google.android.gms.ads.AdView>
+
+                <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/adView_test"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="false"
+                    android:layout_centerHorizontal="false"
+                    android:layout_gravity="center"
+                    android:visibility="gone"
+                    ads:adSize="BANNER"
+                    ads:adUnitId="@string/adUnitID_test"></com.google.android.gms.ads.AdView>
 
                 <TextView
                     android:id="@+id/ad_textview"
