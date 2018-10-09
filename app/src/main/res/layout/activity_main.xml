@@ -212,6 +212,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="8dp"
                     android:layout_marginEnd="4dp"
+                    android:layout_marginBottom="32dp"
                     android:clickable="true"
                     android:focusable="true"
                     android:foreground="?android:attr/selectableItemBackground"

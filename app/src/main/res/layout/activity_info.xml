@@ -77,7 +77,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="@font/open_sans_light"
-                                android:text="Each time on the widget is the time that each sleep cycle ends. The first calculated time is the ending of your 2nd sleep cycle. You can configure which ones you would like to see in settings.When you choose the option to display 3 cycles on the widget, only the ending times for your 4th, 5th, and 6th sleep cycles are shown."
+                                android:text="Each time on the widget is the time that each sleep cycle ends. This is when you should set your alarms. The first calculated time is the ending of your 2nd sleep cycle. You can configure which ones you would like to see in settings.When you choose the option to display 3 cycles on the widget, only the ending times for your 4th, 5th, and 6th sleep cycles are shown."
                                 android:textAlignment="textStart"
                                 android:textColor="#555"
                                 android:textSize="15sp" />
@@ -117,107 +117,107 @@
                             android:textSize="15sp" />
                     </LinearLayout>
                 </android.support.v7.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="bottom|center"
+                    android:orientation="vertical">
+
+                    <android.support.v7.widget.CardView
+                        android:id="@+id/ad_card"
+                        style="@style/Widget.MaterialComponents.CardView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginRight="8dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:foreground="?android:attr/selectableItemBackground"
+                        app:cardBackgroundColor="@color/background"
+                        app:cardCornerRadius="8dp"
+                        app:cardElevation="1dp">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_alignParentBottom="false"
+                            android:orientation="vertical"
+                            android:paddingStart="16dp"
+                            android:paddingLeft="16dp"
+                            android:paddingTop="8dp"
+                            android:paddingEnd="16dp"
+                            android:paddingRight="16dp"
+                            android:paddingBottom="16dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="8dp"
+                                android:fontFamily="@font/open_sans_light"
+                                android:text="Sponsored:"
+                                android:textAlignment="center"
+                                android:textColor="#555"
+                                android:textSize="12sp" />
+
+                            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/adView"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="true"
+                                android:layout_centerHorizontal="true"
+                                android:layout_gravity="center"
+                                android:visibility="gone"
+                                ads:adSize="BANNER"
+                                ads:adUnitId="@string/adUnitID"></com.google.android.gms.ads.AdView>
+
+                            <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+                                android:id="@+id/adView_test"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentBottom="false"
+                                android:layout_centerHorizontal="false"
+                                android:layout_gravity="center"
+                                android:visibility="gone"
+                                ads:adSize="BANNER"
+                                ads:adUnitId="@string/adUnitID_test"></com.google.android.gms.ads.AdView>
+
+                            <TextView
+                                android:id="@+id/ad_textview"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:drawablePadding="8dp"
+                                android:drawableTint="@color/colorPrimaryDark"
+                                android:fontFamily="@font/open_sans"
+                                android:text="(adView): Failed to load"
+                                android:textAlignment="center"
+                                android:textAppearance="@style/TextAppearance.AppCompat"
+                                android:textColor="@color/colorPrimaryDark"
+                                android:textSize="18sp"
+                                android:visibility="gone"
+                                app:backgroundTint="@android:color/transparent" />
+                        </LinearLayout>
+
+                    </android.support.v7.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/versionInfo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|center_horizontal"
+                        android:layout_margin="8dp"
+                        android:fontFamily="@font/open_sans"
+                        android:text="@string/version"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/tertiary_text_light" />
+
+                </LinearLayout>
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="bottom|center"
-        android:orientation="vertical">
-
-        <android.support.v7.widget.CardView
-            android:id="@+id/ad_card"
-            style="@style/Widget.MaterialComponents.CardView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="64dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:foreground="?android:attr/selectableItemBackground"
-            app:cardBackgroundColor="@color/background"
-            app:cardCornerRadius="8dp"
-            app:cardElevation="1dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="false"
-                android:orientation="vertical"
-                android:paddingStart="16dp"
-                android:paddingLeft="16dp"
-                android:paddingTop="8dp"
-                android:paddingEnd="16dp"
-                android:paddingRight="16dp"
-                android:paddingBottom="16dp">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/open_sans_light"
-                    android:text="Sponsored:"
-                    android:textAlignment="center"
-                    android:textColor="#555"
-                    android:textSize="12sp" />
-
-                <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/adView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_centerHorizontal="true"
-                    android:layout_gravity="center"
-                    android:visibility="gone"
-                    ads:adSize="BANNER"
-                    ads:adUnitId="@string/adUnitID"></com.google.android.gms.ads.AdView>
-
-                <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/adView_test"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="false"
-                    android:layout_centerHorizontal="false"
-                    android:layout_gravity="center"
-                    android:visibility="gone"
-                    ads:adSize="BANNER"
-                    ads:adUnitId="@string/adUnitID_test"></com.google.android.gms.ads.AdView>
-
-                <TextView
-                    android:id="@+id/ad_textview"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:drawablePadding="8dp"
-                    android:drawableTint="@color/colorPrimaryDark"
-                    android:fontFamily="@font/open_sans"
-                    android:text="(adView): Failed to load"
-                    android:textAlignment="center"
-                    android:textAppearance="@style/TextAppearance.AppCompat"
-                    android:textColor="@color/colorPrimaryDark"
-                    android:textSize="18sp"
-                    android:visibility="gone"
-                    app:backgroundTint="@android:color/transparent" />
-            </LinearLayout>
-
-        </android.support.v7.widget.CardView>
-
-        <TextView
-            android:id="@+id/versionInfo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom|center_horizontal"
-            android:layout_margin="8dp"
-            android:fontFamily="@font/open_sans"
-            android:text="@string/version"
-            android:textAlignment="center"
-            android:textColor="@android:color/tertiary_text_light" />
-
-    </LinearLayout>
 
 </RelativeLayout>

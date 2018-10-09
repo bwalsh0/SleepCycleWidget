@@ -16,7 +16,7 @@ import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.MobileAds;
 
 public class InformationActivity extends AppCompatActivity {
-    protected AdView mAdView;
+    private AdView mAdView;
     protected TextView ad_text;
 
     @Override
@@ -61,39 +61,39 @@ public class InformationActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mAdView.setAdListener(new AdListener() {
-            @Override
-            public void onAdLoaded() {
-                super.onAdLoaded();
-                // Code to be executed when an ad finishes loading.
-            }
-
-            @Override
-            public void onAdFailedToLoad(int errorCode) {
-                mAdView.setVisibility(View.GONE);
-                ad_text.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onAdOpened() {
-                super.onAdOpened();
-                // Code to be executed when an ad opens an overlay that
-                // covers the screen.
-            }
-
-            @Override
-            public void onAdLeftApplication() {
-                super.onAdLeftApplication();
-                // Code to be executed when the user has left the app.
-            }
-
-            @Override
-            public void onAdClosed() {
-                super.onAdClosed();
-                // Code to be executed when when the user is about to return
-                // to the app after tapping on an ad.
-            }
-        });
+//        mAdView.setAdListener(new AdListener() {
+//            @Override
+//            public void onAdLoaded() {
+//                super.onAdLoaded();
+//                // Code to be executed when an ad finishes loading.
+//            }
+//
+//            @Override
+//            public void onAdFailedToLoad(int errorCode) {
+//                mAdView.setVisibility(View.GONE);
+//                ad_text.setVisibility(View.VISIBLE);
+//            }
+//
+//            @Override
+//            public void onAdOpened() {
+//                super.onAdOpened();
+//                // Code to be executed when an ad opens an overlay that
+//                // covers the screen.
+//            }
+//
+//            @Override
+//            public void onAdLeftApplication() {
+//                super.onAdLeftApplication();
+//                // Code to be executed when the user has left the app.
+//            }
+//
+//            @Override
+//            public void onAdClosed() {
+//                super.onAdClosed();
+//                // Code to be executed when when the user is about to return
+//                // to the app after tapping on an ad.
+//            }
+//        });
 
 
     }

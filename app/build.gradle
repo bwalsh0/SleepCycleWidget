@@ -6,7 +6,7 @@ android {
         applicationId "com.bryanwalsh.sleepcyclewidget"
         minSdkVersion 23
         targetSdkVersion 28
-        versionCode 8
+        versionCode 10
         versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
